@@ -4,7 +4,7 @@ Website institucional do Centro Acadêmico de Direito da UNISINOS (CAED).
 Projeto desenvolvido para fortalecer a presença digital, centralizar informações e facilitar a comunicação com os estudantes.
 
 🔗 Acesse o site:
-https://caed-unisinos.netlify.app/
+https://fabiowlademir.github.io/caed
 
 ✨ Sobre o projeto
 
