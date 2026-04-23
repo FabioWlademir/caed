@@ -1,1575 +1,653 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<!--
+  Design & Desenvolvimento: Fábio Wlademir
+  https://f2suporte.blogspot.com/2025/07/fabio-wlademir-especialista-em-ti-noc.html
+  https://linkedin.com/in/fabiowlademir | https://instagram.com/fabiowlademirrs
+  CAED – Direito UNISINOS © 2026
+-->
+<html lang="pt-BR" prefix="og: https://ogp.me/ns#">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="CAED – Centro Acadêmico de Estudantes de Direito da UNISINOS. Representação estudantil, notícias, simulados e loja oficial." />
-  <meta name="keywords" content="CAED, UNISINOS, Direito, Centro Acadêmico, São Leopoldo, estudantes de direito" />
-  <meta property="og:title" content="CAED – Direito UNISINOS" />
-  <meta property="og:description" content="Centro Acadêmico de Estudantes de Direito da UNISINOS" />
-  <title>CAED – Direito UNISINOS</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-
-  <style>
-    /* ══════════════════════════════════════════════
-       VARIABLES & RESET
-    ══════════════════════════════════════════════ */
-    :root {
-      --brd:     #6B0F1A;
-      --brd-dk:  #450A12;
-      --brd-lt:  #8B1A28;
-      --gold:    #C9A84C;
-      --gold-lt: #E4C87A;
-      --gold-dk: #9A7A30;
-      --cream:   #F5EDD8;
-      --cream-dk:#E0D0B0;
-      --dark:    #180810;
-      --dark2:   #221218;
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'EB Garamond', serif;
-      background: var(--dark);
-      color: var(--cream);
-      overflow-x: hidden;
-    }
-
-    a { color: inherit; text-decoration: none; }
-
-    /* noise grain overlay */
-    body::after {
-      content: '';
-      position: fixed; inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 9999;
-    }
-
-    /* ══════════════════════════════════════════════
-       NAV
-    ══════════════════════════════════════════════ */
-    #nav {
-      position: fixed; top: 0; left: 0; right: 0;
-      z-index: 900;
-      background: rgba(69, 10, 18, 0.96);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(201,168,76,0.2);
-      transition: box-shadow 0.3s;
-    }
-    #nav.scrolled { box-shadow: 0 4px 30px rgba(0,0,0,0.5); }
-
-    .nav-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-      height: 68px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .nav-brand {
-      display: flex; align-items: center; gap: 0.8rem;
-    }
-    .nav-brand-shield {
-      width: 38px; height: 38px;
-      background: var(--gold);
-      clip-path: polygon(50% 0%, 100% 15%, 100% 65%, 50% 100%, 0% 65%, 0% 15%);
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Playfair Display', serif;
-      font-size: 0.95rem;
-      font-weight: 900;
-      color: var(--brd-dk);
-    }
-    .nav-brand-txt { line-height: 1.1; }
-    .nav-brand-txt strong {
-      display: block;
-      font-family: 'Playfair Display', serif;
-      font-size: 1.35rem;
-      font-weight: 900;
-      color: var(--gold);
-      letter-spacing: 0.08em;
-    }
-    .nav-brand-txt span {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.52rem;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: rgba(201,168,76,0.6);
-    }
-
-    .nav-links {
-      display: flex; gap: 0.25rem; list-style: none;
-    }
-    .nav-links a {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.68rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      font-weight: 500;
-      color: var(--cream-dk);
-      padding: 0.5rem 0.9rem;
-      border-radius: 2px;
-      transition: color 0.2s, background 0.2s;
-    }
-    .nav-links a:hover { color: var(--gold); background: rgba(201,168,76,0.08); }
-
-    .nav-loja-btn {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.66rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      font-weight: 700;
-      background: var(--gold);
-      color: var(--brd-dk);
-      padding: 0.6rem 1.3rem;
-      border-radius: 2px;
-      transition: background 0.2s, transform 0.2s;
-    }
-    .nav-loja-btn:hover { background: var(--gold-lt); transform: translateY(-1px); }
-
-    /* hamburger */
-    .nav-toggle {
-      display: none;
-      flex-direction: column; gap: 5px; cursor: pointer;
-      background: none; border: none; padding: 4px;
-    }
-    .nav-toggle span {
-      display: block; width: 22px; height: 2px;
-      background: var(--gold);
-      transition: all 0.3s;
-    }
-
-    /* mobile menu */
-    .nav-mobile {
-      display: none;
-      flex-direction: column;
-      background: var(--brd-dk);
-      padding: 1rem 2rem 1.5rem;
-      border-top: 1px solid rgba(201,168,76,0.15);
-    }
-    .nav-mobile a {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.78rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--cream-dk);
-      padding: 0.75rem 0;
-      border-bottom: 1px solid rgba(201,168,76,0.1);
-    }
-    .nav-mobile.open { display: flex; }
-
-    /* ══════════════════════════════════════════════
-       HERO
-    ══════════════════════════════════════════════ */
-    #hero {
-      min-height: 100vh;
-      display: flex; align-items: center; justify-content: center;
-      text-align: center;
-      position: relative; overflow: hidden;
-      background:
-        radial-gradient(ellipse at 20% 50%, rgba(139,26,40,0.6) 0%, transparent 60%),
-        radial-gradient(ellipse at 80% 30%, rgba(107,15,26,0.4) 0%, transparent 50%),
-        var(--dark);
-      padding-top: 68px;
-    }
-
-    /* decorative ornamental lines */
-    .hero-ornament {
-      position: absolute; inset: 0;
-      background-image:
-        repeating-linear-gradient(
-          0deg,
-          transparent,
-          transparent 79px,
-          rgba(201,168,76,0.04) 80px
-        ),
-        repeating-linear-gradient(
-          90deg,
-          transparent,
-          transparent 79px,
-          rgba(201,168,76,0.03) 80px
-        );
-      pointer-events: none;
-    }
-
-    /* large decorative CAED letters behind */
-    .hero-bg-text {
-      position: absolute;
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(14rem, 28vw, 26rem);
-      font-weight: 900;
-      color: transparent;
-      -webkit-text-stroke: 1px rgba(201,168,76,0.05);
-      letter-spacing: -0.05em;
-      user-select: none;
-      pointer-events: none;
-      top: 50%; transform: translateY(-50%);
-      white-space: nowrap;
-    }
-
-    .hero-content {
-      position: relative; z-index: 2;
-      padding: 2rem;
-      animation: fadeUp 0.9s ease both;
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(28px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .hero-pill {
-      display: inline-flex; align-items: center; gap: 0.6rem;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase;
-      color: var(--gold);
-      border: 1px solid rgba(201,168,76,0.35);
-      padding: 0.45rem 1.3rem;
-      border-radius: 100px;
-      margin-bottom: 2.2rem;
-    }
-    .hero-pill::before, .hero-pill::after {
-      content: '◆'; font-size: 0.45rem; opacity: 0.6;
-    }
-
-    /* SVG shield logo inline */
-    .hero-logo-wrap {
-      width: 160px; height: 160px;
-      margin: 0 auto 2rem;
-      filter: drop-shadow(0 6px 28px rgba(201,168,76,0.25));
-      animation: floatY 5s ease-in-out infinite;
-    }
-    @keyframes floatY {
-      0%,100% { transform: translateY(0); }
-      50%      { transform: translateY(-10px); }
-    }
-
-    .hero-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(3.8rem, 9vw, 7.5rem);
-      font-weight: 900;
-      color: var(--gold);
-      line-height: 0.88;
-      letter-spacing: -0.03em;
-      text-shadow: 0 2px 40px rgba(201,168,76,0.25);
-      margin-bottom: 0.6rem;
-    }
-
-    .hero-tagline {
-      font-family: 'Montserrat', sans-serif;
-      font-size: clamp(0.65rem, 1.5vw, 0.85rem);
-      letter-spacing: 0.4em;
-      text-transform: uppercase;
-      color: rgba(201,168,76,0.65);
-      margin-bottom: 2rem;
-    }
-
-    .hero-rule {
-      width: 60px; height: 1px;
-      background: linear-gradient(to right, transparent, var(--gold), transparent);
-      margin: 0 auto 1.8rem;
-    }
-
-    .hero-desc {
-      font-size: clamp(1.05rem, 2vw, 1.25rem);
-      font-style: italic;
-      color: var(--cream-dk);
-      line-height: 1.75;
-      max-width: 560px;
-      margin: 0 auto 3rem;
-    }
-
-    .hero-btns {
-      display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
-    }
-
-    .btn {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700;
-      padding: 0.9rem 2rem; border-radius: 2px; border: none; cursor: pointer;
-      transition: all 0.25s;
-      display: inline-block;
-    }
-    .btn-gold { background: var(--gold); color: var(--brd-dk); }
-    .btn-gold:hover { background: var(--gold-lt); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,168,76,0.3); }
-    .btn-ghost { background: transparent; color: var(--gold); border: 1px solid rgba(201,168,76,0.5); }
-    .btn-ghost:hover { background: rgba(201,168,76,0.08); transform: translateY(-2px); }
-
-    .hero-scroll-hint {
-      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
-      display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.55rem; letter-spacing: 0.25em; text-transform: uppercase;
-      color: rgba(201,168,76,0.35);
-      animation: scrollBounce 2.5s ease-in-out infinite;
-    }
-    .hero-scroll-hint::after {
-      content: '';
-      display: block; width: 1px; height: 40px;
-      background: linear-gradient(to bottom, rgba(201,168,76,0.4), transparent);
-    }
-    @keyframes scrollBounce {
-      0%,100% { transform: translateX(-50%) translateY(0); }
-      50%      { transform: translateX(-50%) translateY(7px); }
-    }
-
-    /* stats bar */
-    .stats-bar {
-      background: var(--brd-dk);
-      border-top: 1px solid rgba(201,168,76,0.15);
-      border-bottom: 1px solid rgba(201,168,76,0.15);
-      padding: 1.5rem 2rem;
-    }
-    .stats-bar-inner {
-      max-width: 900px; margin: 0 auto;
-      display: flex; align-items: center; justify-content: space-around;
-      flex-wrap: wrap; gap: 1.5rem;
-    }
-    .stat-item { text-align: center; }
-    .stat-num {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem; font-weight: 700; color: var(--gold);
-      line-height: 1;
-    }
-    .stat-label {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase;
-      color: rgba(201,168,76,0.5);
-      margin-top: 0.3rem;
-    }
-    .stat-sep { width: 1px; height: 40px; background: rgba(201,168,76,0.2); }
-
-    /* ══════════════════════════════════════════════
-       SECTION COMMONS
-    ══════════════════════════════════════════════ */
-    section { padding: 6rem 2rem; }
-
-    .container { max-width: 1100px; margin: 0 auto; }
-
-    .sec-label {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.6rem; letter-spacing: 0.35em; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 0.8rem;
-      display: flex; align-items: center; gap: 0.8rem;
-    }
-    .sec-label::before {
-      content: ''; display: block; width: 24px; height: 1px; background: var(--gold);
-    }
-
-    .sec-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 700; color: var(--cream); line-height: 1.15;
-      margin-bottom: 1.2rem;
-    }
-    .sec-title em { color: var(--gold); font-style: normal; }
-
-    .sec-lead {
-      font-size: 1.15rem; color: var(--cream-dk);
-      line-height: 1.75; max-width: 620px;
-    }
-
-    hr.ornament {
-      border: none; height: 1px;
-      background: linear-gradient(to right, transparent, rgba(201,168,76,0.3), transparent);
-      margin: 0;
-    }
-
-    /* ══════════════════════════════════════════════
-       SOBRE
-    ══════════════════════════════════════════════ */
-    #sobre { background: var(--dark2); }
-
-    .sobre-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 5rem;
-      align-items: center;
-    }
-
-    .sobre-visual {
-      position: relative;
-    }
-    .sobre-card {
-      background: linear-gradient(135deg, var(--brd) 0%, var(--brd-dk) 100%);
-      border: 1px solid rgba(201,168,76,0.2);
-      border-radius: 4px;
-      padding: 3rem;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .sobre-card::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse at 50% 0%, rgba(201,168,76,0.08) 0%, transparent 65%);
-    }
-    .sobre-card-logo {
-      width: 120px; margin: 0 auto 1.5rem;
-      filter: drop-shadow(0 4px 16px rgba(201,168,76,0.2));
-    }
-    .sobre-card-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.8rem; font-weight: 700; color: var(--gold);
-      margin-bottom: 0.5rem;
-    }
-    .sobre-card-sub {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase;
-      color: rgba(201,168,76,0.55);
-    }
-
-    /* floating accent card */
-    .sobre-accent {
-      position: absolute; bottom: -1.5rem; right: -1.5rem;
-      background: var(--gold);
-      color: var(--brd-dk);
-      padding: 1.2rem 1.5rem;
-      border-radius: 3px;
-      font-family: 'Montserrat', sans-serif;
-    }
-    .sobre-accent-num {
-      font-size: 1.8rem; font-weight: 700; line-height: 1;
-    }
-    .sobre-accent-txt {
-      font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase;
-      margin-top: 0.2rem;
-    }
-
-    .sobre-text p {
-      font-size: 1.1rem; line-height: 1.8; color: var(--cream-dk);
-      margin-bottom: 1.25rem;
-    }
-
-    .missao-list {
-      list-style: none; margin-top: 2rem;
-    }
-    .missao-list li {
-      display: flex; gap: 1rem;
-      font-family: 'EB Garamond', serif;
-      font-size: 1.05rem; color: var(--cream-dk);
-      padding: 0.85rem 0;
-      border-bottom: 1px solid rgba(201,168,76,0.1);
-    }
-    .missao-list li:last-child { border: none; }
-    .missao-list .icon {
-      color: var(--gold); font-size: 1.1rem; flex-shrink: 0; margin-top: 2px;
-    }
-
-    /* ══════════════════════════════════════════════
-       GESTÃO
-    ══════════════════════════════════════════════ */
-    #gestao { background: var(--dark); }
-
-    .gestao-intro {
-      display: flex; justify-content: space-between; align-items: flex-end;
-      flex-wrap: wrap; gap: 2rem;
-      margin-bottom: 3.5rem;
-    }
-
-    .gestao-badge {
-      display: inline-block;
-      background: rgba(201,168,76,0.12);
-      border: 1px solid rgba(201,168,76,0.3);
-      color: var(--gold);
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
-      padding: 0.45rem 1rem;
-      border-radius: 100px;
-      margin-bottom: 1rem;
-    }
-
-    .gestao-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .membro-card {
-      background: var(--brd-dk);
-      border: 1px solid rgba(201,168,76,0.12);
-      border-radius: 3px;
-      overflow: hidden;
-      transition: transform 0.3s, border-color 0.3s;
-    }
-    .membro-card:hover { transform: translateY(-4px); border-color: rgba(201,168,76,0.35); }
-
-    .membro-foto {
-      aspect-ratio: 1;
-      background: linear-gradient(135deg, var(--brd) 0%, var(--brd-dk) 100%);
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Playfair Display', serif;
-      font-size: 2.5rem; color: var(--gold);
-      border-bottom: 1px solid rgba(201,168,76,0.1);
-    }
-    .membro-info { padding: 1rem 1.2rem; }
-    .membro-nome {
-      font-family: 'Playfair Display', serif;
-      font-size: 1rem; font-weight: 700; color: var(--cream);
-      margin-bottom: 0.2rem;
-    }
-    .membro-cargo {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase;
-      color: var(--gold);
-    }
-
-    /* ══════════════════════════════════════════════
-       NOTICIAS
-    ══════════════════════════════════════════════ */
-    #noticias { background: var(--dark2); }
-
-    .noticias-header {
-      display: flex; justify-content: space-between; align-items: flex-end;
-      flex-wrap: wrap; gap: 1.5rem;
-      margin-bottom: 3rem;
-    }
-
-    .noticias-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      grid-template-rows: auto auto;
-      gap: 1.5rem;
-    }
-
-    .noticia-card {
-      background: var(--brd-dk);
-      border: 1px solid rgba(201,168,76,0.12);
-      border-radius: 3px;
-      overflow: hidden;
-      transition: border-color 0.3s, transform 0.3s;
-      cursor: pointer;
-    }
-    .noticia-card:hover { border-color: rgba(201,168,76,0.4); transform: translateY(-3px); }
-
-    .noticia-img {
-      aspect-ratio: 16/7;
-      background: linear-gradient(135deg, var(--brd) 0%, var(--brd-lt) 50%, var(--brd-dk) 100%);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 3rem;
-      position: relative; overflow: hidden;
-    }
-    .noticia-img::after {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(24,8,16,0.7) 0%, transparent 60%);
-    }
-    .noticia-card.small .noticia-img { aspect-ratio: 16/8; font-size: 2rem; }
-
-    .noticia-body { padding: 1.5rem; }
-    .noticia-meta {
-      display: flex; gap: 1rem; align-items: center;
-      margin-bottom: 0.75rem;
-    }
-    .noticia-cat {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.55rem; letter-spacing: 0.22em; text-transform: uppercase;
-      color: var(--gold); font-weight: 600;
-    }
-    .noticia-data {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.6rem; color: rgba(201,168,76,0.4);
-    }
-    .noticia-titulo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.25rem; font-weight: 700; color: var(--cream);
-      line-height: 1.3; margin-bottom: 0.7rem;
-    }
-    .noticia-card.small .noticia-titulo { font-size: 1rem; }
-    .noticia-resumo {
-      font-size: 0.95rem; color: var(--cream-dk); line-height: 1.65;
-    }
-    .noticia-card.small .noticia-resumo { display: none; }
-
-    .noticia-card.featured { grid-row: 1 / 3; }
-    .noticia-card.featured .noticia-img { aspect-ratio: 16/9; }
-    .noticia-card.featured .noticia-titulo { font-size: 1.6rem; }
-    .noticia-card.featured .noticia-resumo { display: block; }
-
-    /* ══════════════════════════════════════════════
-       SIMULADOS
-    ══════════════════════════════════════════════ */
-    #simulados { background: var(--dark); }
-
-    .simulados-layout {
-      display: grid;
-      grid-template-columns: 1fr 1.4fr;
-      gap: 5rem;
-      align-items: start;
-    }
-
-    .simulado-materia {
-      background: var(--brd-dk);
-      border: 1px solid rgba(201,168,76,0.12);
-      border-radius: 3px;
-      padding: 1.2rem 1.5rem;
-      display: flex; align-items: center; gap: 1rem;
-      cursor: pointer;
-      transition: all 0.25s;
-      margin-bottom: 0.8rem;
-    }
-    .simulado-materia:hover { border-color: var(--gold); background: rgba(107,15,26,0.6); transform: translateX(4px); }
-
-    .sim-icon {
-      width: 42px; height: 42px; border-radius: 50%;
-      background: rgba(201,168,76,0.1);
-      border: 1px solid rgba(201,168,76,0.2);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.2rem; flex-shrink: 0;
-      color: var(--gold);
-    }
-    .sim-info { flex: 1; }
-    .sim-nome {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.05rem; color: var(--cream); font-weight: 600;
-    }
-    .sim-qtd {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase;
-      color: rgba(201,168,76,0.5);
-    }
-    .sim-arrow { color: rgba(201,168,76,0.4); font-size: 0.9rem; }
-
-    /* quiz widget */
-    .quiz-widget {
-      background: var(--brd-dk);
-      border: 1px solid rgba(201,168,76,0.2);
-      border-radius: 4px;
-      overflow: hidden;
-    }
-    .quiz-header {
-      background: var(--brd);
-      padding: 1.5rem;
-      border-bottom: 1px solid rgba(201,168,76,0.15);
-    }
-    .quiz-num {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.58rem; letter-spacing: 0.22em; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 0.6rem;
-    }
-    .quiz-pergunta {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.15rem; color: var(--cream);
-      line-height: 1.55;
-    }
-    .quiz-body { padding: 1.5rem; }
-    .quiz-opcoes { list-style: none; }
-    .quiz-opcao {
-      display: flex; align-items: flex-start; gap: 0.9rem;
-      padding: 0.85rem 1rem;
-      border: 1px solid rgba(201,168,76,0.12);
-      border-radius: 3px;
-      margin-bottom: 0.6rem;
-      cursor: pointer;
-      transition: all 0.2s;
-      font-size: 1rem; color: var(--cream-dk);
-    }
-    .quiz-opcao:hover { border-color: rgba(201,168,76,0.4); background: rgba(201,168,76,0.05); }
-    .quiz-opcao.correta { border-color: #4CAF50; background: rgba(76,175,80,0.1); color: #a5d6a7; }
-    .quiz-opcao.errada  { border-color: #e53935; background: rgba(229,57,53,0.1); color: #ef9a9a; }
-    .quiz-letra {
-      width: 22px; height: 22px; flex-shrink: 0;
-      border-radius: 50%;
-      background: rgba(201,168,76,0.1);
-      border: 1px solid rgba(201,168,76,0.25);
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.65rem; color: var(--gold); font-weight: 600;
-      margin-top: 1px;
-    }
-    .quiz-footer {
-      padding: 1rem 1.5rem;
-      border-top: 1px solid rgba(201,168,76,0.1);
-      display: flex; justify-content: space-between; align-items: center;
-    }
-    .quiz-gabarito {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.68rem; letter-spacing: 0.1em;
-      color: rgba(201,168,76,0.5);
-      font-style: italic;
-    }
-
-    /* ══════════════════════════════════════════════
-       LOJA
-    ══════════════════════════════════════════════ */
-    #loja { background: var(--dark2); }
-
-    .loja-header {
-      display: flex; justify-content: space-between; align-items: flex-end;
-      flex-wrap: wrap; gap: 1.5rem;
-      margin-bottom: 3rem;
-    }
-
-    .produtos-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-      gap: 1.5rem;
-      margin-bottom: 3rem;
-    }
-
-    .produto-card {
-      background: var(--brd-dk);
-      border: 1px solid rgba(201,168,76,0.12);
-      border-radius: 3px;
-      overflow: hidden;
-      transition: transform 0.3s, border-color 0.3s;
-    }
-    .produto-card:hover { transform: translateY(-5px); border-color: rgba(201,168,76,0.4); }
-
-    .produto-img {
-      aspect-ratio: 1;
-      background: linear-gradient(135deg, var(--brd) 0%, var(--brd-dk) 100%);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 4rem;
-      position: relative;
-    }
-    .produto-badge-novo {
-      position: absolute; top: 0.75rem; right: 0.75rem;
-      background: var(--gold);
-      color: var(--brd-dk);
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.5rem; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700;
-      padding: 0.2rem 0.6rem; border-radius: 100px;
-    }
-
-    .produto-info { padding: 1.2rem; }
-    .produto-nome {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.05rem; font-weight: 700; color: var(--cream);
-      margin-bottom: 0.3rem;
-    }
-    .produto-desc {
-      font-size: 0.9rem; color: rgba(224,208,176,0.65);
-      margin-bottom: 1rem; line-height: 1.5;
-    }
-    .produto-footer {
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .produto-preco {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.35rem; font-weight: 700; color: var(--gold);
-    }
-    .produto-comprar {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 700;
-      background: var(--gold);
-      color: var(--brd-dk);
-      border: none; cursor: pointer;
-      padding: 0.55rem 1rem; border-radius: 2px;
-      transition: background 0.2s;
-    }
-    .produto-comprar:hover { background: var(--gold-lt); }
-
-    .loja-contato-banner {
-      background: linear-gradient(135deg, var(--brd) 0%, var(--brd-dk) 100%);
-      border: 1px solid rgba(201,168,76,0.2);
-      border-radius: 4px;
-      padding: 2.5rem 3rem;
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 2rem;
-    }
-    .loja-contato-txt strong {
-      display: block;
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem; color: var(--cream); margin-bottom: 0.4rem;
-    }
-    .loja-contato-txt p {
-      font-size: 1rem; color: var(--cream-dk); line-height: 1.6;
-    }
-    .loja-contato-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
-
-    .btn-wpp {
-      background: #25D366; color: #fff;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 700;
-      padding: 0.85rem 1.8rem; border-radius: 2px; border: none; cursor: pointer;
-      transition: background 0.2s, transform 0.2s;
-    }
-    .btn-wpp:hover { background: #1ebe58; transform: translateY(-2px); }
-
-    .btn-email {
-      background: transparent; color: var(--gold);
-      border: 1px solid rgba(201,168,76,0.4);
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 700;
-      padding: 0.85rem 1.8rem; border-radius: 2px; cursor: pointer;
-      transition: all 0.2s;
-    }
-    .btn-email:hover { background: rgba(201,168,76,0.08); transform: translateY(-2px); }
-
-    /* ══════════════════════════════════════════════
-       CONTATO
-    ══════════════════════════════════════════════ */
-    #contato { background: var(--dark); }
-
-    .contato-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 1fr;
-      gap: 5rem;
-      align-items: start;
-    }
-
-    .contato-item {
-      display: flex; gap: 1.2rem;
-      margin-bottom: 2rem; align-items: flex-start;
-    }
-    .contato-icon {
-      width: 48px; height: 48px;
-      background: rgba(201,168,76,0.1);
-      border: 1px solid rgba(201,168,76,0.2);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.2rem; flex-shrink: 0; color: var(--gold);
-    }
-    .contato-item-txt strong {
-      display: block;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 0.35rem;
-    }
-    .contato-item-txt p {
-      font-size: 1rem; color: var(--cream-dk); line-height: 1.6;
-    }
-
-    .contato-socials {
-      display: flex; gap: 0.75rem; margin-top: 2.5rem;
-    }
-    .social-btn {
-      width: 44px; height: 44px;
-      background: rgba(201,168,76,0.08);
-      border: 1px solid rgba(201,168,76,0.2);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.1rem; color: var(--gold);
-      transition: all 0.2s;
-    }
-    .social-btn:hover { background: var(--gold); color: var(--brd-dk); transform: translateY(-2px); }
-
-    /* form */
-    .contato-form {
-      background: var(--brd-dk);
-      border: 1px solid rgba(201,168,76,0.15);
-      border-radius: 4px;
-      padding: 2.5rem;
-    }
-    .form-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem; color: var(--cream); margin-bottom: 1.8rem;
-    }
-    .form-group { margin-bottom: 1.2rem; }
-    .form-group label {
-      display: block;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase;
-      color: rgba(201,168,76,0.6); margin-bottom: 0.5rem;
-    }
-    .form-group input, .form-group textarea, .form-group select {
-      width: 100%;
-      background: rgba(0,0,0,0.25);
-      border: 1px solid rgba(201,168,76,0.15);
-      border-radius: 2px;
-      padding: 0.85rem 1rem;
-      color: var(--cream);
-      font-family: 'EB Garamond', serif;
-      font-size: 1rem;
-      transition: border-color 0.2s;
-      outline: none;
-    }
-    .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
-      border-color: rgba(201,168,76,0.5);
-    }
-    .form-group textarea { height: 110px; resize: vertical; }
-    .form-group select option { background: var(--brd-dk); }
-
-    /* ══════════════════════════════════════════════
-       FOOTER
-    ══════════════════════════════════════════════ */
-    footer {
-      background: var(--brd-dk);
-      border-top: 1px solid rgba(201,168,76,0.15);
-      padding: 4rem 2rem 2rem;
-    }
-    .footer-inner {
-      max-width: 1100px; margin: 0 auto;
-    }
-    .footer-top {
-      display: grid;
-      grid-template-columns: 1.5fr 1fr 1fr;
-      gap: 3rem;
-      margin-bottom: 3rem;
-      padding-bottom: 3rem;
-      border-bottom: 1px solid rgba(201,168,76,0.1);
-    }
-    .footer-brand strong {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.8rem; font-weight: 900; color: var(--gold);
-      display: block; margin-bottom: 0.3rem;
-    }
-    .footer-brand span {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.55rem; letter-spacing: 0.3em; text-transform: uppercase;
-      color: rgba(201,168,76,0.4);
-      display: block; margin-bottom: 1rem;
-    }
-    .footer-brand p { font-size: 0.95rem; color: rgba(224,208,176,0.55); line-height: 1.7; }
-
-    .footer-col h4 {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 1.2rem;
-    }
-    .footer-col ul { list-style: none; }
-    .footer-col ul li { margin-bottom: 0.6rem; }
-    .footer-col ul li a {
-      font-size: 0.9rem; color: rgba(224,208,176,0.5);
-      transition: color 0.2s;
-    }
-    .footer-col ul li a:hover { color: var(--gold); }
-
-    .footer-bottom {
-      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
-      font-family: 'Montserrat', sans-serif;
-      font-size: 0.62rem; letter-spacing: 0.1em;
-      color: rgba(201,168,76,0.3);
-    }
-    .footer-bottom a { color: rgba(201,168,76,0.5); transition: color 0.2s; }
-    .footer-bottom a:hover { color: var(--gold); }
-
-    /* ══════════════════════════════════════════════
-       MODAL
-    ══════════════════════════════════════════════ */
-    .modal-overlay {
-      position: fixed; inset: 0; z-index: 1000;
-      background: rgba(24,8,16,0.88);
-      backdrop-filter: blur(6px);
-      display: none; align-items: center; justify-content: center;
-      padding: 2rem;
-    }
-    .modal-overlay.open { display: flex; }
-    .modal {
-      background: var(--brd-dk);
-      border: 1px solid rgba(201,168,76,0.25);
-      border-radius: 4px;
-      padding: 2.5rem;
-      max-width: 440px; width: 100%;
-      position: relative;
-      animation: fadeUp 0.3s ease;
-    }
-    .modal-close {
-      position: absolute; top: 1rem; right: 1rem;
-      background: none; border: none; cursor: pointer;
-      color: rgba(201,168,76,0.5); font-size: 1.3rem;
-      transition: color 0.2s;
-    }
-    .modal-close:hover { color: var(--gold); }
-    .modal h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.4rem; color: var(--cream); margin-bottom: 0.5rem;
-    }
-    .modal p { font-size: 0.95rem; color: var(--cream-dk); line-height: 1.6; margin-bottom: 1.5rem; }
-    .modal-btns { display: flex; flex-direction: column; gap: 0.75rem; }
-
-    /* ══════════════════════════════════════════════
-       RESPONSIVE
-    ══════════════════════════════════════════════ */
-    @media (max-width: 900px) {
-      .sobre-grid, .contato-grid, .simulados-layout { grid-template-columns: 1fr; gap: 3rem; }
-      .noticias-grid { grid-template-columns: 1fr; }
-      .noticia-card.featured { grid-row: auto; }
-      .footer-top { grid-template-columns: 1fr 1fr; }
-      .nav-links, .nav-loja-btn { display: none; }
-      .nav-toggle { display: flex; }
-      .stat-sep { display: none; }
-    }
-
-    @media (max-width: 600px) {
-      section { padding: 4rem 1.25rem; }
-      .footer-top { grid-template-columns: 1fr; }
-      .hero-title { font-size: 3.2rem; }
-      .loja-contato-banner { flex-direction: column; }
-      .gestao-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    /* ══════════════════════════════════════════════
-       SCROLL REVEAL
-    ══════════════════════════════════════════════ */
-    .reveal {
-      opacity: 0; transform: translateY(25px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .reveal.visible { opacity: 1; transform: none; }
-  </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>CAED Unisinos – Centro Acadêmico de Direito | São Leopoldo RS</title>
+<meta name="description" content="CAED – Centro Acadêmico de Estudantes de Direito da UNISINOS. Representação estudantil, notícias, simulados OAB, loja oficial e carteirinha estudantil. Campus São Leopoldo e Porto Alegre."/>
+<meta name="keywords" content="CAED, CAED Unisinos, centro acadêmico direito unisinos, caed unisinos são leopoldo, centro acadêmico direito, estudantes direito unisinos, OAB, simulados direito, carteirinha estudantil, meia entrada unisinos, gestão CAED 2025, direito unisinos porto alegre"/>
+<meta name="author" content="CAED – Centro Acadêmico de Estudantes de Direito da UNISINOS"/>
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"/>
+<meta name="geo.region" content="BR-RS"/>
+<meta name="geo.placename" content="São Leopoldo, Rio Grande do Sul, Brasil"/>
+<meta name="geo.position" content="-29.7603;-51.1481"/>
+<link rel="canonical" href="https://caedunisinos.github.io/"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://caedunisinos.github.io/"/>
+<meta property="og:title" content="CAED Unisinos – Centro Acadêmico de Direito"/>
+<meta property="og:description" content="Representação estudantil, notícias, simulados OAB, loja e carteirinha. CAED Direito UNISINOS – São Leopoldo e Porto Alegre."/>
+<meta property="og:locale" content="pt_BR"/>
+<meta property="og:site_name" content="CAED Unisinos"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="CAED Unisinos – Centro Acadêmico de Direito"/>
+<meta name="twitter:description" content="Centro Acadêmico de Estudantes de Direito da UNISINOS. Representação, notícias, simulados e loja oficial."/>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"EducationalOrganization","name":"CAED – Centro Acadêmico de Estudantes de Direito da UNISINOS","alternateName":["CAED Unisinos","CAED Direito Unisinos"],"description":"Centro Acadêmico de Estudantes de Direito da UNISINOS, representando estudantes nos campi de São Leopoldo e Porto Alegre.","url":"https://caedunisinos.github.io/","email":"caed-unisinos@outlook.com","telephone":"+55-51-99731-1502","sameAs":["https://www.instagram.com/caed_unisinos/","https://wa.me/5551997311502"],"address":{"@type":"PostalAddress","streetAddress":"Avenida Unisinos, 950 – Cristo Rei, Sala E05, Sala 205","addressLocality":"São Leopoldo","addressRegion":"RS","postalCode":"93022-750","addressCountry":"BR"},"parentOrganization":{"@type":"CollegeOrUniversity","name":"UNISINOS – Universidade do Vale do Rio dos Sinos","url":"https://www.unisinos.br"}}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+:root{--brd:#6B0F1A;--brd-dk:#450A12;--brd-lt:#8B1A28;--gold:#C9A84C;--gold-lt:#E4C87A;--gold-dk:#9A7A30;--cream:#F5EDD8;--cream-dk:#E0D0B0;--dark:#180810;--dark2:#221218}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'EB Garamond',serif;background:var(--dark);color:var(--cream);overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;z-index:9999}
+
+/* NAV */
+#nav{position:fixed;top:0;left:0;right:0;z-index:900;background:rgba(69,10,18,0.97);backdrop-filter:blur(14px);border-bottom:1px solid rgba(201,168,76,0.2);transition:box-shadow .3s}
+#nav.scrolled{box-shadow:0 4px 30px rgba(0,0,0,0.6)}
+.nav-inner{max-width:1200px;margin:0 auto;padding:0 2rem;height:68px;display:flex;align-items:center;justify-content:space-between}
+.nav-brand{display:flex;align-items:center;gap:.8rem}
+.nav-brand-shield{width:38px;height:38px;background:var(--gold);clip-path:polygon(50% 0%,100% 15%,100% 65%,50% 100%,0% 65%,0% 15%);display:flex;align-items:center;justify-content:center;font-size:1rem;font-weight:900;color:var(--brd-dk)}
+.nav-brand-txt{line-height:1.1}
+.nav-brand-txt strong{display:block;font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:900;color:var(--gold);letter-spacing:.08em}
+.nav-brand-txt span{font-family:'Montserrat',sans-serif;font-size:.52rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(201,168,76,.6)}
+.nav-links{display:flex;gap:.1rem;list-style:none}
+.nav-links a{font-family:'Montserrat',sans-serif;font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;font-weight:500;color:var(--cream-dk);padding:.5rem .8rem;border-radius:2px;transition:color .2s,background .2s}
+.nav-links a:hover{color:var(--gold);background:rgba(201,168,76,.08)}
+.nav-links a.sim-lnk{color:var(--gold-lt)}
+.nav-loja-btn{font-family:'Montserrat',sans-serif;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;font-weight:700;background:var(--gold);color:var(--brd-dk);padding:.6rem 1.3rem;border-radius:2px;transition:background .2s,transform .2s}
+.nav-loja-btn:hover{background:var(--gold-lt);transform:translateY(-1px)}
+.nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.nav-toggle span{display:block;width:22px;height:2px;background:var(--gold);transition:all .3s}
+.nav-mobile{display:none;flex-direction:column;background:var(--brd-dk);padding:1rem 2rem 1.5rem;border-top:1px solid rgba(201,168,76,.15)}
+.nav-mobile a{font-family:'Montserrat',sans-serif;font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cream-dk);padding:.75rem 0;border-bottom:1px solid rgba(201,168,76,.1)}
+.nav-mobile a.sim-lnk{color:var(--gold-lt)}
+.nav-mobile.open{display:flex}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;background:radial-gradient(ellipse at 20% 50%,rgba(139,26,40,.6) 0%,transparent 60%),radial-gradient(ellipse at 80% 30%,rgba(107,15,26,.4) 0%,transparent 50%),var(--dark);padding-top:68px}
+.hero-orn{position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,transparent,transparent 79px,rgba(201,168,76,.04) 80px),repeating-linear-gradient(90deg,transparent,transparent 79px,rgba(201,168,76,.03) 80px);pointer-events:none}
+.hero-bgt{position:absolute;font-family:'Playfair Display',serif;font-size:clamp(14rem,28vw,26rem);font-weight:900;color:transparent;-webkit-text-stroke:1px rgba(201,168,76,.05);user-select:none;pointer-events:none;top:50%;transform:translateY(-50%);white-space:nowrap}
+.hero-content{position:relative;z-index:2;padding:2rem;animation:fadeUp .9s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+.hero-pill{display:inline-flex;align-items:center;gap:.6rem;font-family:'Montserrat',sans-serif;font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(201,168,76,.35);padding:.45rem 1.3rem;border-radius:100px;margin-bottom:2.2rem}
+.hero-pill::before,.hero-pill::after{content:'◆';font-size:.45rem;opacity:.6}
+.hero-logo-wrap{width:160px;height:160px;margin:0 auto 2rem;filter:drop-shadow(0 6px 28px rgba(201,168,76,.25));animation:floatY 5s ease-in-out infinite}
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(3.8rem,9vw,7.5rem);font-weight:900;color:var(--gold);line-height:.88;letter-spacing:-.03em;text-shadow:0 2px 40px rgba(201,168,76,.25);margin-bottom:.6rem}
+.hero-tagline{font-family:'Montserrat',sans-serif;font-size:clamp(.65rem,1.5vw,.85rem);letter-spacing:.4em;text-transform:uppercase;color:rgba(201,168,76,.65);margin-bottom:2rem}
+.hero-rule{width:60px;height:1px;background:linear-gradient(to right,transparent,var(--gold),transparent);margin:0 auto 1.8rem}
+.hero-desc{font-size:clamp(1.05rem,2vw,1.25rem);font-style:italic;color:var(--cream-dk);line-height:1.75;max-width:560px;margin:0 auto 3rem}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn{font-family:'Montserrat',sans-serif;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;padding:.9rem 2rem;border-radius:2px;border:none;cursor:pointer;transition:all .25s;display:inline-block}
+.btn-gold{background:var(--gold);color:var(--brd-dk)}
+.btn-gold:hover{background:var(--gold-lt);transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,168,76,.3)}
+.btn-ghost{background:transparent;color:var(--gold);border:1px solid rgba(201,168,76,.5)}
+.btn-ghost:hover{background:rgba(201,168,76,.08);transform:translateY(-2px)}
+.hero-scroll{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;font-family:'Montserrat',sans-serif;font-size:.55rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(201,168,76,.35);animation:scb 2.5s ease-in-out infinite}
+.hero-scroll::after{content:'';display:block;width:1px;height:40px;background:linear-gradient(to bottom,rgba(201,168,76,.4),transparent)}
+@keyframes scb{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(7px)}}
+
+/* STATS */
+.stats-bar{background:var(--brd-dk);border-top:1px solid rgba(201,168,76,.15);border-bottom:1px solid rgba(201,168,76,.15);padding:1.5rem 2rem}
+.stats-bar-inner{max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-around;flex-wrap:wrap;gap:1.5rem}
+.stat-item{text-align:center}
+.stat-num{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--gold);line-height:1}
+.stat-label{font-family:'Montserrat',sans-serif;font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(201,168,76,.5);margin-top:.3rem}
+.stat-sep{width:1px;height:40px;background:rgba(201,168,76,.2)}
+
+/* SECTIONS */
+section{padding:6rem 2rem}
+.container{max-width:1100px;margin:0 auto}
+.sec-label{font-family:'Montserrat',sans-serif;font-size:.6rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem;display:flex;align-items:center;gap:.8rem}
+.sec-label::before{content:'';display:block;width:24px;height:1px;background:var(--gold)}
+.sec-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);font-weight:700;color:var(--cream);line-height:1.15;margin-bottom:1.2rem}
+.sec-title em{color:var(--gold);font-style:normal}
+.sec-lead{font-size:1.15rem;color:var(--cream-dk);line-height:1.75;max-width:620px}
+hr.ornament{border:none;height:1px;background:linear-gradient(to right,transparent,rgba(201,168,76,.3),transparent);margin:0}
+
+/* SOBRE */
+#sobre{background:var(--dark2)}
+.sobre-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.sobre-card{background:linear-gradient(135deg,var(--brd) 0%,var(--brd-dk) 100%);border:1px solid rgba(201,168,76,.2);border-radius:4px;padding:3rem;text-align:center;position:relative;overflow:hidden}
+.sobre-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(201,168,76,.08) 0%,transparent 65%)}
+.sobre-card-title{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:var(--gold);margin-bottom:.5rem}
+.sobre-card-sub{font-family:'Montserrat',sans-serif;font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(201,168,76,.55)}
+.sobre-accent{position:absolute;bottom:-1.5rem;right:-1.5rem;background:var(--gold);color:var(--brd-dk);padding:1.2rem 1.5rem;border-radius:3px;font-family:'Montserrat',sans-serif}
+.sobre-accent-num{font-size:1.8rem;font-weight:700;line-height:1}
+.sobre-accent-txt{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;margin-top:.2rem}
+.sobre-text p{font-size:1.1rem;line-height:1.8;color:var(--cream-dk);margin-bottom:1.25rem}
+.missao-list{list-style:none;margin-top:2rem}
+.missao-list li{display:flex;gap:1rem;font-size:1.05rem;color:var(--cream-dk);padding:.85rem 0;border-bottom:1px solid rgba(201,168,76,.1)}
+.missao-list li:last-child{border:none}
+.missao-list .icon{color:var(--gold);flex-shrink:0;margin-top:2px}
+
+/* GESTÃO */
+#gestao{background:var(--dark)}
+.gestao-intro{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:2rem;margin-bottom:3.5rem}
+.gestao-badge{display:inline-block;background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.3);color:var(--gold);font-family:'Montserrat',sans-serif;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;padding:.45rem 1rem;border-radius:100px;margin-bottom:1rem}
+.gestao-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1.5rem}
+.membro-card{background:var(--brd-dk);border:1px solid rgba(201,168,76,.12);border-radius:3px;overflow:hidden;transition:transform .3s,border-color .3s}
+.membro-card:hover{transform:translateY(-4px);border-color:rgba(201,168,76,.35)}
+.membro-foto{aspect-ratio:1;background:linear-gradient(135deg,var(--brd) 0%,var(--brd-dk) 100%);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:2.5rem;color:var(--gold);border-bottom:1px solid rgba(201,168,76,.1)}
+.membro-info{padding:1rem 1.2rem}
+.membro-nome{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;color:var(--cream);margin-bottom:.2rem}
+.membro-cargo{font-family:'Montserrat',sans-serif;font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold)}
+
+/* NOTICIAS */
+#noticias{background:var(--dark2)}
+.noticias-header{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1.5rem;margin-bottom:3rem}
+.noticias-grid{display:grid;grid-template-columns:2fr 1fr;grid-template-rows:auto auto;gap:1.5rem}
+.noticia-card{background:var(--brd-dk);border:1px solid rgba(201,168,76,.12);border-radius:3px;overflow:hidden;transition:border-color .3s,transform .3s;cursor:pointer}
+.noticia-card:hover{border-color:rgba(201,168,76,.4);transform:translateY(-3px)}
+.noticia-img{aspect-ratio:16/7;background:linear-gradient(135deg,var(--brd) 0%,var(--brd-lt) 50%,var(--brd-dk) 100%);display:flex;align-items:center;justify-content:center;font-size:3rem;position:relative;overflow:hidden}
+.noticia-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(24,8,16,.7) 0%,transparent 60%)}
+.noticia-card.small .noticia-img{aspect-ratio:16/8;font-size:2rem}
+.noticia-body{padding:1.5rem}
+.noticia-meta{display:flex;gap:1rem;align-items:center;margin-bottom:.75rem}
+.noticia-cat{font-family:'Montserrat',sans-serif;font-size:.55rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:600}
+.noticia-data{font-family:'Montserrat',sans-serif;font-size:.6rem;color:rgba(201,168,76,.4)}
+.noticia-titulo{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:700;color:var(--cream);line-height:1.3;margin-bottom:.7rem}
+.noticia-card.small .noticia-titulo{font-size:1rem}
+.noticia-resumo{font-size:.95rem;color:var(--cream-dk);line-height:1.65}
+.noticia-card.small .noticia-resumo{display:none}
+.noticia-card.featured{grid-row:1/3}
+.noticia-card.featured .noticia-img{aspect-ratio:16/9}
+.noticia-card.featured .noticia-titulo{font-size:1.6rem}
+.noticia-card.featured .noticia-resumo{display:block}
+
+/* SIMULADOS BANNER */
+#simulados-banner{background:var(--dark)}
+.sim-banner-box{background:linear-gradient(135deg,var(--brd-dk) 0%,#2a0810 100%);border:1px solid rgba(201,168,76,.25);border-radius:6px;padding:3.5rem 4rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:2.5rem;position:relative;overflow:hidden}
+.sim-banner-box::before{content:'⚖';position:absolute;right:2rem;top:50%;transform:translateY(-50%);font-size:10rem;opacity:.04;pointer-events:none}
+.sim-banner-txt h2{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.6rem);font-weight:700;color:var(--cream);margin-bottom:1rem}
+.sim-banner-txt h2 em{color:var(--gold);font-style:normal}
+.sim-banner-txt p{font-size:1.05rem;color:var(--cream-dk);line-height:1.7;max-width:540px}
+.sim-materias{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.2rem}
+.sim-tag{font-family:'Montserrat',sans-serif;font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.2);color:var(--gold);padding:.3rem .8rem;border-radius:100px}
+.sim-banner-cta{flex-shrink:0}
+.btn-sim{display:inline-flex;flex-direction:column;align-items:center;gap:.3rem;font-family:'Montserrat',sans-serif;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;background:var(--gold);color:var(--brd-dk);padding:1rem 2.2rem;border-radius:3px;border:none;cursor:pointer;transition:all .25s;white-space:nowrap;text-decoration:none}
+.btn-sim:hover{background:var(--gold-lt);transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,168,76,.3)}
+.btn-sim-sub{font-size:.52rem;letter-spacing:.1em;font-weight:400;opacity:.65}
+
+/* LOJA */
+#loja{background:var(--dark2)}
+.loja-header{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1.5rem;margin-bottom:3rem}
+.produtos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.5rem;margin-bottom:3rem}
+.produto-card{background:var(--brd-dk);border:1px solid rgba(201,168,76,.12);border-radius:4px;overflow:hidden;transition:transform .3s,border-color .3s,box-shadow .3s}
+.produto-card:hover{transform:translateY(-6px);border-color:rgba(201,168,76,.45);box-shadow:0 16px 40px rgba(0,0,0,.4)}
+.produto-img{aspect-ratio:1;background:linear-gradient(145deg,#3a0c18 0%,#1e0810 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.produto-img svg{width:72%;height:72%}
+.produto-badge-novo{position:absolute;top:.75rem;right:.75rem;background:var(--gold);color:var(--brd-dk);font-family:'Montserrat',sans-serif;font-size:.5rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;padding:.2rem .7rem;border-radius:100px}
+.produto-badge-voto{position:absolute;top:.75rem;left:.75rem;background:rgba(201,168,76,.15);color:var(--gold-lt);border:1px solid rgba(201,168,76,.3);font-family:'Montserrat',sans-serif;font-size:.48rem;letter-spacing:.18em;text-transform:uppercase;padding:.2rem .65rem;border-radius:100px}
+.produto-info{padding:1.2rem 1.4rem}
+.produto-nome{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--cream);margin-bottom:.3rem}
+.produto-desc{font-size:.9rem;color:rgba(224,208,176,.6);margin-bottom:1rem;line-height:1.5}
+.produto-footer{display:flex;align-items:center;justify-content:space-between}
+.produto-preco{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:700;color:var(--gold)}
+.produto-comprar{font-family:'Montserrat',sans-serif;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;font-weight:700;background:var(--gold);color:var(--brd-dk);border:none;cursor:pointer;padding:.55rem 1rem;border-radius:2px;transition:background .2s}
+.produto-comprar:hover{background:var(--gold-lt)}
+.loja-contato-banner{background:linear-gradient(135deg,var(--brd) 0%,var(--brd-dk) 100%);border:1px solid rgba(201,168,76,.2);border-radius:4px;padding:2.5rem 3rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:2rem}
+.loja-contato-txt strong{display:block;font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--cream);margin-bottom:.4rem}
+.loja-contato-txt p{font-size:1rem;color:var(--cream-dk);line-height:1.6}
+.loja-contato-btns{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-wpp{display:inline-flex;align-items:center;gap:.5rem;background:#25D366;color:#fff;font-family:'Montserrat',sans-serif;font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;font-weight:700;padding:.85rem 1.8rem;border-radius:2px;border:none;cursor:pointer;transition:background .2s,transform .2s;text-decoration:none}
+.btn-wpp:hover{background:#1ebe58;transform:translateY(-2px)}
+.btn-email{display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:var(--gold);border:1px solid rgba(201,168,76,.4);font-family:'Montserrat',sans-serif;font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;font-weight:700;padding:.85rem 1.8rem;border-radius:2px;cursor:pointer;transition:all .2s;text-decoration:none}
+.btn-email:hover{background:rgba(201,168,76,.08);transform:translateY(-2px)}
+
+/* CONTATO */
+#contato{background:var(--dark)}
+.contato-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:5rem;align-items:start}
+.contato-item{display:flex;gap:1.2rem;margin-bottom:2rem;align-items:flex-start}
+.contato-icon{width:48px;height:48px;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;color:var(--gold)}
+.contato-item-txt strong{display:block;font-family:'Montserrat',sans-serif;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.35rem}
+.contato-item-txt p{font-size:1rem;color:var(--cream-dk);line-height:1.6}
+.contato-item-txt a{color:var(--gold);transition:color .2s}
+.contato-item-txt a:hover{color:var(--gold-lt)}
+.contato-socials{display:flex;gap:.75rem;margin-top:2.5rem}
+.social-btn{width:44px;height:44px;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:var(--gold);transition:all .2s;text-decoration:none}
+.social-btn:hover{background:var(--gold);color:var(--brd-dk);transform:translateY(-2px)}
+.contato-form{background:var(--brd-dk);border:1px solid rgba(201,168,76,.15);border-radius:4px;padding:2.5rem}
+.form-title{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--cream);margin-bottom:1.8rem}
+.form-group{margin-bottom:1.2rem}
+.form-group label{display:block;font-family:'Montserrat',sans-serif;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(201,168,76,.6);margin-bottom:.5rem}
+.form-group input,.form-group textarea,.form-group select{width:100%;background:rgba(0,0,0,.25);border:1px solid rgba(201,168,76,.15);border-radius:2px;padding:.85rem 1rem;color:var(--cream);font-family:'EB Garamond',serif;font-size:1rem;transition:border-color .2s;outline:none}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:rgba(201,168,76,.5)}
+.form-group textarea{height:110px;resize:vertical}
+.form-group select option{background:var(--brd-dk)}
+
+/* FOOTER */
+footer{background:var(--brd-dk);border-top:1px solid rgba(201,168,76,.15);padding:4rem 2rem 2rem}
+.footer-inner{max-width:1100px;margin:0 auto}
+.footer-top{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:3rem;margin-bottom:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(201,168,76,.1)}
+.footer-brand strong{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;color:var(--gold);display:block;margin-bottom:.3rem}
+.footer-sub{font-family:'Montserrat',sans-serif;font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(201,168,76,.4);display:block;margin-bottom:1rem}
+.footer-brand p{font-size:.95rem;color:rgba(224,208,176,.55);line-height:1.7}
+.footer-col h4{font-family:'Montserrat',sans-serif;font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem}
+.footer-col ul{list-style:none}
+.footer-col ul li{margin-bottom:.6rem}
+.footer-col ul li a{font-size:.9rem;color:rgba(224,208,176,.5);transition:color .2s}
+.footer-col ul li a:hover{color:var(--gold)}
+.footer-dev-strip{border-top:1px solid rgba(201,168,76,.1);padding-top:1.5rem;margin-bottom:1rem;display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap}
+.footer-dev-label{font-family:'Montserrat',sans-serif;font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(201,168,76,.4)}
+.footer-dev-links{display:flex;gap:.75rem;align-items:center;flex-wrap:wrap}
+.footer-dev-links a{font-family:'Montserrat',sans-serif;font-size:.7rem;color:var(--gold);transition:color .2s;display:flex;align-items:center;gap:.3rem}
+.footer-dev-links a:hover{color:var(--gold-lt)}
+.footer-dev-sep{color:rgba(201,168,76,.2);font-size:.8rem}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-family:'Montserrat',sans-serif;font-size:.62rem;letter-spacing:.1em;color:rgba(201,168,76,.3)}
+.footer-bottom a{color:rgba(201,168,76,.5);transition:color .2s}
+.footer-bottom a:hover{color:var(--gold)}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;z-index:1000;background:rgba(24,8,16,.88);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:2rem}
+.modal-overlay.open{display:flex}
+.modal{background:var(--brd-dk);border:1px solid rgba(201,168,76,.25);border-radius:4px;padding:2.5rem;max-width:440px;width:100%;position:relative;animation:fadeUp .3s ease}
+.modal-close{position:absolute;top:1rem;right:1rem;background:none;border:none;cursor:pointer;color:rgba(201,168,76,.5);font-size:1.3rem;transition:color .2s}
+.modal-close:hover{color:var(--gold)}
+.modal h3{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--cream);margin-bottom:.5rem}
+.modal p{font-size:.95rem;color:var(--cream-dk);line-height:1.6;margin-bottom:1.5rem}
+.modal-btns{display:flex;flex-direction:column;gap:.75rem}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .sobre-grid,.contato-grid{grid-template-columns:1fr;gap:3rem}
+  .noticias-grid{grid-template-columns:1fr}
+  .noticia-card.featured{grid-row:auto}
+  .footer-top{grid-template-columns:1fr 1fr}
+  .nav-links,.nav-loja-btn{display:none}
+  .nav-toggle{display:flex}
+  .stat-sep{display:none}
+  .sim-banner-box{padding:2.5rem 2rem}
+}
+@media(max-width:600px){
+  section{padding:4rem 1.25rem}
+  .footer-top{grid-template-columns:1fr}
+  .hero-title{font-size:3.2rem}
+  .loja-contato-banner{flex-direction:column}
+  .gestao-grid{grid-template-columns:repeat(2,1fr)}
+}
+
+/* SCROLL REVEAL */
+.reveal{opacity:0;transform:translateY(25px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:none}
+</style>
 </head>
 <body>
 
-<!-- ══════ NAV ══════ -->
-<header id="nav">
+<header id="nav" role="banner">
   <div class="nav-inner">
-    <a href="#hero" class="nav-brand">
-      <div class="nav-brand-shield">⚖</div>
+    <a href="#hero" class="nav-brand" aria-label="CAED Direito UNISINOS">
+      <div class="nav-brand-shield" aria-hidden="true">⚖</div>
       <div class="nav-brand-txt">
         <strong>CAED</strong>
         <span>Direito Unisinos</span>
       </div>
     </a>
-
-    <ul class="nav-links">
+    <ul class="nav-links" role="navigation" aria-label="Menu principal">
       <li><a href="#sobre">Sobre</a></li>
       <li><a href="#gestao">Gestão</a></li>
       <li><a href="#noticias">Notícias</a></li>
-      <li><a href="#simulados">Simulados</a></li>
+      <li><a href="https://fabiowlademir.github.io/simuladosdireito/" target="_blank" rel="noopener" class="sim-lnk">Simulados ↗</a></li>
       <li><a href="#contato">Contato</a></li>
     </ul>
-
     <a href="#loja" class="nav-loja-btn">🛍 Loja</a>
-
-    <button class="nav-toggle" id="navToggle" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
   </div>
-  <div class="nav-mobile" id="navMobile">
+  <nav class="nav-mobile" id="navMobile">
     <a href="#sobre">Sobre o CAED</a>
     <a href="#gestao">Gestão</a>
     <a href="#noticias">Notícias</a>
-    <a href="#simulados">Simulados</a>
+    <a href="https://fabiowlademir.github.io/simuladosdireito/" target="_blank" rel="noopener" class="sim-lnk">Simulados ↗</a>
     <a href="#loja">Loja</a>
     <a href="#contato">Contato</a>
-  </div>
+  </nav>
 </header>
 
-<!-- ══════ HERO ══════ -->
-<section id="hero">
-  <div class="hero-ornament"></div>
-  <div class="hero-bg-text">CAED</div>
-
+<main>
+<section id="hero" aria-label="Página inicial CAED">
+  <div class="hero-orn" aria-hidden="true"></div>
+  <div class="hero-bgt" aria-hidden="true">CAED</div>
   <div class="hero-content">
     <div class="hero-pill">Centro Acadêmico de Estudantes de Direito</div>
-
-    <!-- CAED logo SVG inline (reproduzindo o escudo) -->
-    <div class="hero-logo-wrap">
+    <div class="hero-logo-wrap" aria-hidden="true">
       <svg viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg">
-        <!-- shield shape -->
-        <path d="M100 5 L190 40 L190 130 Q190 190 100 215 Q10 190 10 130 L10 40 Z"
-              fill="#6B0F1A" stroke="#C9A84C" stroke-width="3"/>
-        <!-- inner shield border -->
-        <path d="M100 18 L178 48 L178 128 Q178 180 100 202 Q22 180 22 128 L22 48 Z"
-              fill="none" stroke="rgba(201,168,76,0.3)" stroke-width="1.5"/>
-        <!-- scales icon -->
-        <text x="100" y="140" text-anchor="middle" font-size="80" fill="#C9A84C" font-family="serif">⚖</text>
-        <!-- CAED text -->
-        <text x="100" y="175" text-anchor="middle"
-              font-family="'Playfair Display', serif"
-              font-size="22" font-weight="900" fill="#C9A84C" letter-spacing="4">CAED</text>
-        <text x="100" y="192" text-anchor="middle"
-              font-family="'Montserrat', sans-serif"
-              font-size="7" fill="rgba(201,168,76,0.7)" letter-spacing="3">DIREITO UNISINOS</text>
+        <defs><linearGradient id="hg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#8B1A28"/><stop offset="100%" style="stop-color:#450A12"/></linearGradient></defs>
+        <path d="M100 5 L190 40 L190 130 Q190 190 100 215 Q10 190 10 130 L10 40 Z" fill="url(#hg)" stroke="#C9A84C" stroke-width="2.5"/>
+        <path d="M100 18 L178 48 L178 128 Q178 180 100 202 Q22 180 22 128 L22 48 Z" fill="none" stroke="rgba(201,168,76,0.25)" stroke-width="1"/>
+        <text x="100" y="138" text-anchor="middle" font-size="78" fill="#C9A84C" font-family="serif">⚖</text>
+        <text x="100" y="172" text-anchor="middle" font-family="'Playfair Display',serif" font-size="21" font-weight="900" fill="#C9A84C" letter-spacing="5">CAED</text>
+        <text x="100" y="189" text-anchor="middle" font-family="'Montserrat',sans-serif" font-size="6.5" fill="rgba(201,168,76,0.72)" letter-spacing="3.5">DIREITO UNISINOS</text>
       </svg>
     </div>
-
     <h1 class="hero-title">CAED</h1>
-    <p class="hero-tagline">Direito · Unisinos · São Leopoldo</p>
-    <div class="hero-rule"></div>
-    <p class="hero-desc">
-      Somos o Centro Acadêmico de Estudantes de Direito da UNISINOS — sua voz,
-      sua representação e seu espaço de luta dentro e fora das salas de aula.
-    </p>
+    <p class="hero-tagline">Direito · Unisinos · São Leopoldo &amp; Porto Alegre</p>
+    <div class="hero-rule" aria-hidden="true"></div>
+    <p class="hero-desc">Somos o Centro Acadêmico de Estudantes de Direito da UNISINOS — sua voz, sua representação e seu espaço de luta dentro e fora das salas de aula.</p>
     <div class="hero-btns">
       <a href="#sobre" class="btn btn-gold">Conheça o CAED</a>
       <a href="#noticias" class="btn btn-ghost">Ver Notícias</a>
     </div>
   </div>
-
-  <div class="hero-scroll-hint">rolar</div>
+  <div class="hero-scroll" aria-hidden="true">rolar</div>
 </section>
 
-<!-- stats bar -->
-<div class="stats-bar">
+<div class="stats-bar" aria-label="Números do CAED">
   <div class="stats-bar-inner">
-    <div class="stat-item">
-      <div class="stat-num">998</div>
-      <div class="stat-label">Seguidores</div>
-    </div>
-    <div class="stat-sep"></div>
-    <div class="stat-item">
-      <div class="stat-num">2025/2</div>
-      <div class="stat-label">Gestão Atual</div>
-    </div>
-    <div class="stat-sep"></div>
-    <div class="stat-item">
-      <div class="stat-num">100+</div>
-      <div class="stat-label">Carteirinhas Emitidas</div>
-    </div>
-    <div class="stat-sep"></div>
-    <div class="stat-item">
-      <div class="stat-num">São Leopoldo</div>
-      <div class="stat-label">Campus Principal</div>
-    </div>
+    <div class="stat-item"><div class="stat-num">998+</div><div class="stat-label">Seguidores</div></div>
+    <div class="stat-sep" aria-hidden="true"></div>
+    <div class="stat-item"><div class="stat-num">2025/2</div><div class="stat-label">Gestão Atual</div></div>
+    <div class="stat-sep" aria-hidden="true"></div>
+    <div class="stat-item"><div class="stat-num">100+</div><div class="stat-label">Carteirinhas Emitidas</div></div>
+    <div class="stat-sep" aria-hidden="true"></div>
+    <div class="stat-item"><div class="stat-num">2 Campi</div><div class="stat-label">SL &amp; Porto Alegre</div></div>
   </div>
 </div>
+<hr class="ornament"/>
 
-<hr class="ornament" />
-
-<!-- ══════ SOBRE ══════ -->
-<section id="sobre">
+<section id="sobre" aria-labelledby="sobre-h">
   <div class="container">
     <div class="sobre-grid">
-      <div class="sobre-visual reveal">
+      <div class="sobre-visual reveal" aria-hidden="true">
         <div class="sobre-card">
-          <div class="sobre-card-logo">
-            <svg viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg" width="100">
-              <path d="M100 5 L190 40 L190 130 Q190 190 100 215 Q10 190 10 130 L10 40 Z"
-                    fill="#6B0F1A" stroke="#C9A84C" stroke-width="3"/>
-              <text x="100" y="140" text-anchor="middle" font-size="80" fill="#C9A84C" font-family="serif">⚖</text>
-              <text x="100" y="172" text-anchor="middle"
-                    font-family="'Playfair Display', serif"
-                    font-size="22" font-weight="900" fill="#C9A84C" letter-spacing="4">CAED</text>
-              <text x="100" y="189" text-anchor="middle"
-                    font-family="'Montserrat', sans-serif"
-                    font-size="7" fill="rgba(201,168,76,0.7)" letter-spacing="3">DIREITO UNISINOS</text>
-            </svg>
-          </div>
+          <svg viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg" width="110" style="margin:0 auto 1.5rem;display:block;filter:drop-shadow(0 4px 16px rgba(201,168,76,0.2))">
+            <defs><linearGradient id="sg2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#8B1A28"/><stop offset="100%" style="stop-color:#450A12"/></linearGradient></defs>
+            <path d="M100 5 L190 40 L190 130 Q190 190 100 215 Q10 190 10 130 L10 40 Z" fill="url(#sg2)" stroke="#C9A84C" stroke-width="2.5"/>
+            <text x="100" y="138" text-anchor="middle" font-size="78" fill="#C9A84C" font-family="serif">⚖</text>
+            <text x="100" y="172" text-anchor="middle" font-family="'Playfair Display',serif" font-size="21" font-weight="900" fill="#C9A84C" letter-spacing="5">CAED</text>
+            <text x="100" y="189" text-anchor="middle" font-family="'Montserrat',sans-serif" font-size="6.5" fill="rgba(201,168,76,0.72)" letter-spacing="3.5">DIREITO UNISINOS</text>
+          </svg>
           <div class="sobre-card-title">CAED</div>
-          <div class="sobre-card-sub">Centro Acadêmico · Desde a fundação</div>
+          <div class="sobre-card-sub">Centro Acadêmico · Direito UNISINOS</div>
         </div>
-        <div class="sobre-accent">
-          <div class="sobre-accent-num">A Renovação</div>
-          <div class="sobre-accent-txt">Gestão 2025/2</div>
-        </div>
+        <div class="sobre-accent"><div class="sobre-accent-num">A Renovação</div><div class="sobre-accent-txt">Gestão 2025/2</div></div>
       </div>
-
       <div class="sobre-text reveal">
         <div class="sec-label">Quem somos</div>
-        <h2 class="sec-title">O <em>CAED</em> é a nossa casa</h2>
-        <p>O Centro Acadêmico de Estudantes de Direito da UNISINOS é a entidade de representação estudantil do curso de Direito nos campi de São Leopoldo e Porto Alegre.</p>
-        <p>Somos uma organização estudantil autônoma, financiada pelos próprios alunos e pela Universidade, dedicada a defender os direitos dos acadêmicos, promover eventos, eventos culturais, palestras e aproximar os estudantes do mundo jurídico.</p>
-
+        <h2 class="sec-title" id="sobre-h">O <em>CAED</em> é a nossa casa</h2>
+        <p>O <strong>Centro Acadêmico de Estudantes de Direito da UNISINOS</strong> é a entidade de representação estudantil do curso de Direito nos campi de São Leopoldo e Porto Alegre, Rio Grande do Sul.</p>
+        <p>Somos uma organização estudantil autônoma dedicada a defender os direitos dos acadêmicos, promover eventos culturais, palestras jurídicas e aproximar os estudantes do mundo do Direito.</p>
         <ul class="missao-list">
-          <li>
-            <span class="icon">⚖️</span>
-            <span><strong>Representação:</strong> Defendemos os interesses dos estudantes de Direito perante a universidade e órgãos externos.</span>
-          </li>
-          <li>
-            <span class="icon">📚</span>
-            <span><strong>Apoio Acadêmico:</strong> Promovemos monitorias, simulados, palestras e materiais de estudo.</span>
-          </li>
-          <li>
-            <span class="icon">🤝</span>
-            <span><strong>Integração:</strong> Festas de acolhida, eventos sociais e uma comunidade unida pela paixão pelo Direito.</span>
-          </li>
-          <li>
-            <span class="icon">🏆</span>
-            <span><strong>Carteirinha Estudantil:</strong> Facilitamos a emissão de meia-entrada para todos os estudantes da UNISINOS.</span>
-          </li>
+          <li><span class="icon">⚖️</span><span><strong>Representação:</strong> Defendemos os interesses dos estudantes perante a universidade e órgãos externos.</span></li>
+          <li><span class="icon">📚</span><span><strong>Apoio Acadêmico:</strong> Monitorias, simulados OAB, palestras e materiais de estudo.</span></li>
+          <li><span class="icon">🤝</span><span><strong>Integração:</strong> Festas de acolhida, eventos sociais e uma comunidade unida pelo Direito.</span></li>
+          <li><span class="icon">🎓</span><span><strong>Carteirinha:</strong> Emissão de meia-entrada para todos os estudantes da UNISINOS.</span></li>
         </ul>
       </div>
     </div>
   </div>
 </section>
+<hr class="ornament"/>
 
-<hr class="ornament" />
-
-<!-- ══════ GESTÃO ══════ -->
-<section id="gestao">
+<section id="gestao" aria-labelledby="gestao-h">
   <div class="container">
     <div class="gestao-intro">
       <div class="reveal">
         <div class="sec-label">Quem nos representa</div>
-        <h2 class="sec-title">Gestão <em>2025/2</em></h2>
-        <p class="sec-lead">A Renovação chegou. Conheça a equipe que está trabalhando pelo curso de Direito da UNISINOS.</p>
+        <h2 class="sec-title" id="gestao-h">Gestão <em>2025/2</em></h2>
+        <p class="sec-lead">A Renovação chegou. Conheça a equipe que trabalha pelo Direito UNISINOS.</p>
       </div>
-      <div class="reveal">
-        <span class="gestao-badge">✦ CAED – A Renovação</span>
-      </div>
+      <div class="reveal"><span class="gestao-badge">✦ CAED – A Renovação</span></div>
     </div>
-
     <div class="gestao-grid reveal">
-      <div class="membro-card">
-        <div class="membro-foto">A</div>
-        <div class="membro-info">
-          <div class="membro-nome">Adalgiso</div>
-          <div class="membro-cargo">Presidente</div>
-        </div>
-      </div>
-      <div class="membro-card">
-        <div class="membro-foto">⚖</div>
-        <div class="membro-info">
-          <div class="membro-nome">Vice-Presidência</div>
-          <div class="membro-cargo">A confirmar</div>
-        </div>
-      </div>
-      <div class="membro-card">
-        <div class="membro-foto">📋</div>
-        <div class="membro-info">
-          <div class="membro-nome">Secretaria</div>
-          <div class="membro-cargo">A confirmar</div>
-        </div>
-      </div>
-      <div class="membro-card">
-        <div class="membro-foto">💰</div>
-        <div class="membro-info">
-          <div class="membro-nome">Tesouraria</div>
-          <div class="membro-cargo">A confirmar</div>
-        </div>
-      </div>
-      <div class="membro-card">
-        <div class="membro-foto">📢</div>
-        <div class="membro-info">
-          <div class="membro-nome">Comunicação</div>
-          <div class="membro-cargo">A confirmar</div>
-        </div>
-      </div>
-      <div class="membro-card">
-        <div class="membro-foto">🎓</div>
-        <div class="membro-info">
-          <div class="membro-nome">Acadêmico</div>
-          <div class="membro-cargo">A confirmar</div>
-        </div>
-      </div>
+      <div class="membro-card"><div class="membro-foto">A</div><div class="membro-info"><div class="membro-nome">Adalgiso</div><div class="membro-cargo">Presidente</div></div></div>
+      <div class="membro-card"><div class="membro-foto">⚖</div><div class="membro-info"><div class="membro-nome">Vice-Presidência</div><div class="membro-cargo">A confirmar</div></div></div>
+      <div class="membro-card"><div class="membro-foto">📋</div><div class="membro-info"><div class="membro-nome">Secretaria</div><div class="membro-cargo">A confirmar</div></div></div>
+      <div class="membro-card"><div class="membro-foto">💰</div><div class="membro-info"><div class="membro-nome">Tesouraria</div><div class="membro-cargo">A confirmar</div></div></div>
+      <div class="membro-card"><div class="membro-foto">📢</div><div class="membro-info"><div class="membro-nome">Comunicação</div><div class="membro-cargo">A confirmar</div></div></div>
+      <div class="membro-card"><div class="membro-foto">🎓</div><div class="membro-info"><div class="membro-nome">Acadêmico</div><div class="membro-cargo">A confirmar</div></div></div>
     </div>
-
-    <div style="margin-top:2rem; text-align:center;" class="reveal">
-      <p style="font-style:italic; color:rgba(224,208,176,0.45); font-size:0.9rem;">
-        * Dados da gestão serão atualizados em breve. Entre em contato com o CAED para informações completas.
-      </p>
+    <div style="margin-top:2rem;text-align:center;" class="reveal">
+      <p style="font-style:italic;color:rgba(224,208,176,.4);font-size:.88rem;">* Gestão completa em breve. Siga <a href="https://www.instagram.com/caed_unisinos/" target="_blank" rel="noopener" style="color:var(--gold);">@caed_unisinos</a> no Instagram.</p>
     </div>
   </div>
 </section>
+<hr class="ornament"/>
 
-<hr class="ornament" />
-
-<!-- ══════ NOTÍCIAS ══════ -->
-<section id="noticias">
+<section id="noticias" aria-labelledby="noticias-h">
   <div class="container">
     <div class="noticias-header">
       <div class="reveal">
         <div class="sec-label">Fique por dentro</div>
-        <h2 class="sec-title">Notícias e <em>Atualizações</em></h2>
+        <h2 class="sec-title" id="noticias-h">Notícias e <em>Atualizações</em></h2>
       </div>
-      <div class="reveal">
-        <a href="#contato" class="btn btn-ghost" style="font-size:0.62rem;">Ver todas →</a>
-      </div>
+      <div class="reveal"><a href="https://www.instagram.com/caed_unisinos/" target="_blank" rel="noopener" class="btn btn-ghost" style="font-size:.62rem;">Ver no Instagram ↗</a></div>
     </div>
-
     <div class="noticias-grid reveal">
-      <!-- Featured -->
-      <div class="noticia-card featured">
-        <div class="noticia-img">🗳️</div>
+      <article class="noticia-card featured">
+        <div class="noticia-img" aria-hidden="true">🗳️</div>
         <div class="noticia-body">
-          <div class="noticia-meta">
-            <span class="noticia-cat">Eleições</span>
-            <span class="noticia-data">Abril 2026</span>
-          </div>
-          <div class="noticia-titulo">Resultado das Eleições Ordinárias do CAED 2026 publicado!</div>
-          <div class="noticia-resumo">
-            O processo eleitoral foi concluído com sucesso. A nova gestão foi eleita democraticamente pelos estudantes de Direito da UNISINOS nos campi de São Leopoldo e Porto Alegre. Confira o resultado completo e conheça os representantes eleitos para o próximo ciclo.
-          </div>
+          <div class="noticia-meta"><span class="noticia-cat">Eleições</span><span class="noticia-data">Abril 2026</span></div>
+          <h3 class="noticia-titulo">Resultado das Eleições Ordinárias do CAED 2026 publicado!</h3>
+          <p class="noticia-resumo">O processo eleitoral foi concluído com sucesso. A nova gestão foi eleita democraticamente pelos estudantes de Direito da UNISINOS. Acompanhe as novidades em <a href="https://www.instagram.com/caed_unisinos/" target="_blank" rel="noopener" style="color:var(--gold);">@caed_unisinos</a>.</p>
         </div>
-      </div>
-
-      <!-- Small cards -->
-      <div class="noticia-card small">
-        <div class="noticia-img">🎓</div>
+      </article>
+      <article class="noticia-card small">
+        <div class="noticia-img" aria-hidden="true">🎓</div>
         <div class="noticia-body">
-          <div class="noticia-meta">
-            <span class="noticia-cat">Carteirinha</span>
-            <span class="noticia-data">Abr 2026</span>
-          </div>
-          <div class="noticia-titulo">Grande Mutirão de Emissão de Carteirinha Estudantil</div>
+          <div class="noticia-meta"><span class="noticia-cat">Carteirinha</span><span class="noticia-data">Abr 2026</span></div>
+          <h3 class="noticia-titulo">Mutirão de Emissão de Carteirinha Estudantil – Meia-Entrada por R$ 40,00</h3>
         </div>
-      </div>
-
-      <div class="noticia-card small">
-        <div class="noticia-img">👕</div>
+      </article>
+      <article class="noticia-card small">
+        <div class="noticia-img" aria-hidden="true">👕</div>
         <div class="noticia-body">
-          <div class="noticia-meta">
-            <span class="noticia-cat">Loja</span>
-            <span class="noticia-data">Abr 2026</span>
-          </div>
-          <div class="noticia-titulo">Concurso Aberto: Escolha o modelo do moletom e camiseta do CAED!</div>
+          <div class="noticia-meta"><span class="noticia-cat">Loja</span><span class="noticia-data">Abr 2026</span></div>
+          <h3 class="noticia-titulo">Concurso Aberto: Vote no modelo do moletom e camiseta do CAED!</h3>
         </div>
-      </div>
+      </article>
     </div>
   </div>
 </section>
+<hr class="ornament"/>
 
-<hr class="ornament" />
-
-<!-- ══════ SIMULADOS ══════ -->
-<section id="simulados">
+<section id="simulados-banner" aria-labelledby="sim-h">
   <div class="container">
-    <div class="simulados-layout">
-      <div class="reveal">
+    <div class="sim-banner-box reveal">
+      <div class="sim-banner-txt">
         <div class="sec-label">Estude com o CAED</div>
-        <h2 class="sec-title">Simulados e <em>Questões</em></h2>
-        <p class="sec-lead" style="margin-bottom:2.5rem;">
-          Prepare-se para provas, OAB e concursos com questões elaboradas especialmente para estudantes de Direito da UNISINOS.
-        </p>
-
-        <div class="simulado-materia">
-          <div class="sim-icon">⚖️</div>
-          <div class="sim-info">
-            <div class="sim-nome">Direito Constitucional</div>
-            <div class="sim-qtd">Em breve · Questões comentadas</div>
-          </div>
-          <div class="sim-arrow">›</div>
-        </div>
-        <div class="simulado-materia">
-          <div class="sim-icon">📜</div>
-          <div class="sim-info">
-            <div class="sim-nome">Direito Civil</div>
-            <div class="sim-qtd">Em breve · Questões comentadas</div>
-          </div>
-          <div class="sim-arrow">›</div>
-        </div>
-        <div class="simulado-materia">
-          <div class="sim-icon">🔍</div>
-          <div class="sim-info">
-            <div class="sim-nome">Direito Penal</div>
-            <div class="sim-qtd">Em breve · Questões comentadas</div>
-          </div>
-          <div class="sim-arrow">›</div>
-        </div>
-        <div class="simulado-materia">
-          <div class="sim-icon">🏛️</div>
-          <div class="sim-info">
-            <div class="sim-nome">Processo Civil</div>
-            <div class="sim-qtd">Em breve · Questões comentadas</div>
-          </div>
-          <div class="sim-arrow">›</div>
-        </div>
-        <div class="simulado-materia">
-          <div class="sim-icon">🤝</div>
-          <div class="sim-info">
-            <div class="sim-nome">Teoria do Direito</div>
-            <div class="sim-qtd">Em breve · Questões comentadas</div>
-          </div>
-          <div class="sim-arrow">›</div>
+        <h2 id="sim-h">Simulados e <em>Questões</em> de Direito</h2>
+        <p>Prepare-se para as provas, OAB e concursos com questões comentadas. Acesse a plataforma gratuita e exclusiva para estudantes de Direito.</p>
+        <div class="sim-materias">
+          <span class="sim-tag">Constitucional</span><span class="sim-tag">Civil</span><span class="sim-tag">Penal</span>
+          <span class="sim-tag">Processo Civil</span><span class="sim-tag">Teoria do Direito</span><span class="sim-tag">OAB</span>
         </div>
       </div>
-
-      <!-- Interactive quiz widget -->
-      <div class="reveal">
-        <div class="quiz-widget">
-          <div class="quiz-header">
-            <div class="quiz-num">Questão de Exemplo · Direito Constitucional</div>
-            <div class="quiz-pergunta">
-              Segundo a Constituição Federal de 1988, os direitos e garantias fundamentais expressos na CF não excluem outros decorrentes do regime e dos princípios por ela adotados, conforme o art. 5º, §2º. Essa norma consagra qual princípio?
-            </div>
-          </div>
-          <div class="quiz-body">
-            <ul class="quiz-opcoes" id="quizOpcoes">
-              <li class="quiz-opcao" onclick="responder(this, false)">
-                <span class="quiz-letra">A</span>
-                Princípio da Legalidade Estrita
-              </li>
-              <li class="quiz-opcao" onclick="responder(this, false)">
-                <span class="quiz-letra">B</span>
-                Princípio da Reserva Legal Absoluta
-              </li>
-              <li class="quiz-opcao" onclick="responder(this, true)">
-                <span class="quiz-letra">C</span>
-                Princípio da Não Taxatividade dos Direitos Fundamentais
-              </li>
-              <li class="quiz-opcao" onclick="responder(this, false)">
-                <span class="quiz-letra">D</span>
-                Princípio da Supremacia Constitucional Formal
-              </li>
-            </ul>
-          </div>
-          <div class="quiz-footer">
-            <span class="quiz-gabarito" id="quizMsg">Clique em uma alternativa para responder</span>
-            <button class="btn btn-ghost" style="font-size:0.6rem; padding:0.5rem 1rem;" onclick="resetQuiz()">Limpar</button>
-          </div>
-        </div>
-
-        <div style="margin-top:1.5rem; padding:1.2rem 1.5rem; background:rgba(201,168,76,0.06); border:1px solid rgba(201,168,76,0.12); border-radius:3px;">
-          <p style="font-family:'Montserrat',sans-serif; font-size:0.65rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold); margin-bottom:0.5rem;">Em construção</p>
-          <p style="font-size:0.92rem; color:var(--cream-dk); line-height:1.6;">
-            A área de simulados completa está sendo desenvolvida. Em breve, centenas de questões comentadas para te ajudar a passar na OAB e nos concursos!
-          </p>
-        </div>
+      <div class="sim-banner-cta">
+        <a href="https://fabiowlademir.github.io/simuladosdireito/" target="_blank" rel="noopener" class="btn-sim">
+          Acessar Simulados ↗
+          <span class="btn-sim-sub">fabiowlademir.github.io/simuladosdireito</span>
+        </a>
       </div>
     </div>
   </div>
 </section>
+<hr class="ornament"/>
 
-<hr class="ornament" />
-
-<!-- ══════ LOJA ══════ -->
-<section id="loja">
+<section id="loja" aria-labelledby="loja-h">
   <div class="container">
     <div class="loja-header">
       <div class="reveal">
         <div class="sec-label">Produtos Oficiais</div>
-        <h2 class="sec-title">Loja <em>CAED</em></h2>
-        <p class="sec-lead">Vista a identidade do curso. Produtos exclusivos do Centro Acadêmico.</p>
+        <h2 class="sec-title" id="loja-h">Loja <em>CAED</em></h2>
+        <p class="sec-lead">Vista a identidade do curso. Produtos exclusivos do Centro Acadêmico de Direito da UNISINOS.</p>
       </div>
     </div>
-
     <div class="produtos-grid reveal">
-      <div class="produto-card">
+
+      <!-- Camiseta -->
+      <article class="produto-card">
         <div class="produto-img">
-          👕
+          <span class="produto-badge-voto">🗳 Em votação</span>
+          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-label="Camiseta CAED">
+            <defs><linearGradient id="sg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#8B1A28"/><stop offset="100%" style="stop-color:#5a0d18"/></linearGradient></defs>
+            <path d="M60 55 L30 75 L45 90 L55 82 L55 165 L145 165 L145 82 L155 90 L170 75 L140 55 Q130 45 120 42 L100 50 L80 42 Q70 45 60 55Z" fill="url(#sg)" stroke="#C9A84C" stroke-width="1.5"/>
+            <path d="M80 42 Q90 58 100 60 Q110 58 120 42" fill="none" stroke="#C9A84C" stroke-width="1.8"/>
+            <text x="100" y="106" text-anchor="middle" font-size="12" fill="#C9A84C">⚖</text>
+            <text x="100" y="122" text-anchor="middle" font-family="'Playfair Display',serif" font-size="16" font-weight="900" fill="#C9A84C" letter-spacing="3">CAED</text>
+            <text x="100" y="136" text-anchor="middle" font-family="'Montserrat',sans-serif" font-size="5" fill="rgba(201,168,76,0.6)" letter-spacing="2">DIREITO · UNISINOS</text>
+          </svg>
           <span class="produto-badge-novo">Novo</span>
         </div>
         <div class="produto-info">
           <div class="produto-nome">Camiseta CAED 2026</div>
-          <div class="produto-desc">Modelo em votação — vote e ajude a definir o design oficial!</div>
-          <div class="produto-footer">
-            <span class="produto-preco">A definir</span>
-            <button class="produto-comprar" onclick="abrirModal('Camiseta CAED 2026')">Interesse</button>
-          </div>
+          <div class="produto-desc">Modelo em votação — ajude a escolher o design! Bordô com detalhes dourados.</div>
+          <div class="produto-footer"><span class="produto-preco">A definir</span><button class="produto-comprar" onclick="abrirModal('Camiseta CAED 2026')">Interesse</button></div>
         </div>
-      </div>
+      </article>
 
-      <div class="produto-card">
-        <div class="produto-img">🧥</div>
+      <!-- Moletom -->
+      <article class="produto-card">
+        <div class="produto-img">
+          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-label="Moletom CAED">
+            <defs><linearGradient id="hg2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#6B0F1A"/><stop offset="100%" style="stop-color:#3a0810"/></linearGradient></defs>
+            <path d="M70 45 Q100 20 130 45 L140 58 Q120 52 100 53 Q80 52 60 58 Z" fill="url(#hg2)" stroke="#C9A84C" stroke-width="1.5"/>
+            <path d="M55 60 L30 80 L45 100 L55 90 L55 170 L145 170 L145 90 L155 100 L170 80 L145 60 Q130 52 100 53 Q70 52 55 60Z" fill="url(#hg2)" stroke="#C9A84C" stroke-width="1.5"/>
+            <path d="M72 130 Q100 125 128 130 L128 155 Q100 160 72 155 Z" fill="rgba(0,0,0,0.25)" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
+            <text x="100" y="105" text-anchor="middle" font-size="12" fill="#C9A84C">⚖</text>
+            <text x="100" y="120" text-anchor="middle" font-family="'Playfair Display',serif" font-size="14" font-weight="900" fill="#C9A84C" letter-spacing="3">CAED</text>
+            <text x="100" y="130" text-anchor="middle" font-family="'Montserrat',sans-serif" font-size="4.5" fill="rgba(201,168,76,0.6)" letter-spacing="2">DIREITO UNISINOS</text>
+          </svg>
+        </div>
         <div class="produto-info">
           <div class="produto-nome">Moletom CAED</div>
           <div class="produto-desc">Bordô com brasão dourado. Conforto e identidade para o dia a dia acadêmico.</div>
-          <div class="produto-footer">
-            <span class="produto-preco">A definir</span>
-            <button class="produto-comprar" onclick="abrirModal('Moletom CAED')">Interesse</button>
-          </div>
+          <div class="produto-footer"><span class="produto-preco">A definir</span><button class="produto-comprar" onclick="abrirModal('Moletom CAED')">Interesse</button></div>
         </div>
-      </div>
+      </article>
 
-      <div class="produto-card">
-        <div class="produto-img">☕</div>
+      <!-- Caneca -->
+      <article class="produto-card">
+        <div class="produto-img">
+          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-label="Caneca CAED">
+            <defs><linearGradient id="mg" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:#7a1020"/><stop offset="100%" style="stop-color:#450A12"/></linearGradient></defs>
+            <rect x="45" y="65" width="100" height="100" rx="8" fill="url(#mg)" stroke="#C9A84C" stroke-width="2"/>
+            <path d="M145 85 Q175 85 175 115 Q175 145 145 145" fill="none" stroke="#C9A84C" stroke-width="6" stroke-linecap="round"/>
+            <ellipse cx="95" cy="65" rx="50" ry="7" fill="#5a0d18" stroke="#C9A84C" stroke-width="1.5"/>
+            <ellipse cx="95" cy="65" rx="44" ry="5" fill="#8B1A28" opacity=".6"/>
+            <path d="M75 48 Q77 38 73 30" fill="none" stroke="rgba(201,168,76,0.3)" stroke-width="2" stroke-linecap="round"/>
+            <path d="M90 44 Q92 32 88 22" fill="none" stroke="rgba(201,168,76,0.3)" stroke-width="2" stroke-linecap="round"/>
+            <path d="M105 48 Q107 38 103 30" fill="none" stroke="rgba(201,168,76,0.3)" stroke-width="2" stroke-linecap="round"/>
+            <text x="95" y="104" text-anchor="middle" font-size="14" fill="#C9A84C">⚖</text>
+            <text x="95" y="120" text-anchor="middle" font-family="'Playfair Display',serif" font-size="18" font-weight="900" fill="#C9A84C" letter-spacing="3">CAED</text>
+            <text x="95" y="133" text-anchor="middle" font-family="'Montserrat',sans-serif" font-size="5.5" fill="rgba(201,168,76,0.65)" letter-spacing="2">DIREITO · UNISINOS</text>
+          </svg>
+        </div>
         <div class="produto-info">
           <div class="produto-nome">Caneca CAED</div>
           <div class="produto-desc">Para o café que te mantém acordado nas vésperas de prova.</div>
-          <div class="produto-footer">
-            <span class="produto-preco">Em breve</span>
-            <button class="produto-comprar" onclick="abrirModal('Caneca CAED')">Interesse</button>
-          </div>
+          <div class="produto-footer"><span class="produto-preco">Em breve</span><button class="produto-comprar" onclick="abrirModal('Caneca CAED')">Interesse</button></div>
         </div>
-      </div>
+      </article>
 
-      <div class="produto-card">
-        <div class="produto-img">🎓</div>
+      <!-- Carteirinha -->
+      <article class="produto-card">
+        <div class="produto-img">
+          <span class="produto-badge-novo">Disponível</span>
+          <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" aria-label="Carteirinha Estudantil CAED">
+            <defs><linearGradient id="cg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#6B0F1A"/><stop offset="100%" style="stop-color:#2a0810"/></linearGradient></defs>
+            <rect x="30" y="55" width="140" height="95" rx="8" fill="url(#cg)" stroke="#C9A84C" stroke-width="2"/>
+            <rect x="30" y="55" width="140" height="28" rx="8" fill="#8B1A28"/>
+            <rect x="30" y="72" width="140" height="11" fill="#8B1A28"/>
+            <text x="100" y="74" text-anchor="middle" font-family="'Montserrat',sans-serif" font-size="7" fill="#C9A84C" letter-spacing="2">UNISINOS · CAED DIREITO</text>
+            <rect x="42" y="92" width="42" height="42" rx="4" fill="rgba(0,0,0,0.3)" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
+            <text x="63" y="118" text-anchor="middle" font-size="18" fill="rgba(201,168,76,0.4)">👤</text>
+            <rect x="94" y="95" width="65" height="4" rx="2" fill="rgba(201,168,76,0.5)"/>
+            <rect x="94" y="106" width="50" height="3" rx="2" fill="rgba(201,168,76,0.25)"/>
+            <rect x="94" y="114" width="55" height="3" rx="2" fill="rgba(201,168,76,0.25)"/>
+            <rect x="94" y="122" width="40" height="3" rx="2" fill="rgba(201,168,76,0.25)"/>
+            <text x="100" y="150" text-anchor="middle" font-size="9" fill="rgba(201,168,76,0.55)">⚖ MEIA ENTRADA</text>
+            <rect x="42" y="143" width="3" height="10" fill="rgba(201,168,76,0.4)"/>
+            <rect x="47" y="143" width="2" height="10" fill="rgba(201,168,76,0.4)"/>
+            <rect x="51" y="143" width="4" height="10" fill="rgba(201,168,76,0.4)"/>
+            <rect x="57" y="143" width="2" height="10" fill="rgba(201,168,76,0.4)"/>
+            <rect x="61" y="143" width="3" height="10" fill="rgba(201,168,76,0.4)"/>
+            <rect x="66" y="143" width="5" height="10" fill="rgba(201,168,76,0.4)"/>
+          </svg>
+        </div>
         <div class="produto-info">
           <div class="produto-nome">Carteirinha Estudantil</div>
-          <div class="produto-desc">Meia-entrada digital e física. Válida em eventos e estabelecimentos credenciados.</div>
-          <div class="produto-footer">
-            <span class="produto-preco">R$ 40,00</span>
-            <button class="produto-comprar" onclick="abrirModal('Carteirinha Estudantil')">Quero!</button>
-          </div>
+          <div class="produto-desc">Meia-entrada digital e física. Válida para todos os alunos da UNISINOS.</div>
+          <div class="produto-footer"><span class="produto-preco">R$ 40,00</span><button class="produto-comprar" onclick="abrirModal('Carteirinha Estudantil – R$ 40,00')">Quero!</button></div>
         </div>
-      </div>
+      </article>
     </div>
 
     <div class="loja-contato-banner reveal">
       <div class="loja-contato-txt">
         <strong>Compra sem complicação</strong>
-        <p>Sem carrinho, sem cadastro. Fale diretamente com o CAED pelo WhatsApp ou e-mail para fazer seu pedido. Simples, rápido e direto.</p>
+        <p>Sem carrinho, sem cadastro. Fale diretamente com o CAED pelo WhatsApp ou e-mail. Simples, rápido e direto.</p>
       </div>
       <div class="loja-contato-btns">
-        <a href="https://wa.me/5551999999999?text=Ol%C3%A1%2C+tenho+interesse+em+produtos+do+CAED!" target="_blank" class="btn-wpp">📱 WhatsApp</a>
-        <a href="mailto:caed@unisinos.br?subject=Interesse+em+produto+CAED" class="btn-email">✉️ E-mail</a>
+        <a href="https://wa.me/5551997311502?text=Ol%C3%A1+CAED%2C+tenho+interesse+em+produtos!" target="_blank" rel="noopener" class="btn-wpp">📱 WhatsApp</a>
+        <a href="mailto:caed-unisinos@outlook.com?subject=Interesse+em+produto+CAED" class="btn-email">✉️ E-mail</a>
       </div>
     </div>
   </div>
 </section>
+<hr class="ornament"/>
 
-<hr class="ornament" />
-
-<!-- ══════ CONTATO ══════ -->
-<section id="contato">
+<section id="contato" aria-labelledby="contato-h">
   <div class="container">
     <div class="contato-grid">
       <div class="reveal">
         <div class="sec-label">Fale conosco</div>
-        <h2 class="sec-title">Entre em <em>Contato</em></h2>
-        <p class="sec-lead" style="margin-bottom:3rem;">
-          Sugestões, dúvidas, reclamações, eventos, parcerias? A nossa porta está sempre aberta.
-        </p>
-
+        <h2 class="sec-title" id="contato-h">Entre em <em>Contato</em></h2>
+        <p class="sec-lead" style="margin-bottom:3rem;">Sugestões, dúvidas, eventos, parcerias? A nossa porta está sempre aberta.</p>
         <div class="contato-item">
-          <div class="contato-icon">📍</div>
-          <div class="contato-item-txt">
-            <strong>Localização</strong>
-            <p>Avenida Unisinos, 950 – Cristo Rei<br>Sala E 05, Sala 205 · São Leopoldo/RS · CEP 93022-750</p>
-          </div>
+          <div class="contato-icon" aria-hidden="true">📍</div>
+          <div class="contato-item-txt"><strong>Localização</strong><p>Avenida Unisinos, 950 – Cristo Rei<br>Sala E05, Sala 205 · São Leopoldo/RS<br>CEP 93022-750</p></div>
         </div>
-
         <div class="contato-item">
-          <div class="contato-icon">📧</div>
-          <div class="contato-item-txt">
-            <strong>E-mail</strong>
-            <p><a href="mailto:caed@unisinos.br" style="color:var(--gold);">caed@unisinos.br</a></p>
-          </div>
+          <div class="contato-icon" aria-hidden="true">📧</div>
+          <div class="contato-item-txt"><strong>E-mail Oficial</strong><p><a href="mailto:caed-unisinos@outlook.com">caed-unisinos@outlook.com</a></p></div>
         </div>
-
         <div class="contato-item">
-          <div class="contato-icon">📱</div>
-          <div class="contato-item-txt">
-            <strong>WhatsApp / Instagram</strong>
-            <p>
-              <a href="https://wa.me/5551999999999" style="color:var(--gold);" target="_blank">WhatsApp CAED</a><br>
-              <a href="https://instagram.com/caed_unisinos" style="color:var(--gold);" target="_blank">@caed_unisinos</a>
-            </p>
-          </div>
+          <div class="contato-icon" aria-hidden="true">📱</div>
+          <div class="contato-item-txt"><strong>WhatsApp</strong><p><a href="https://wa.me/5551997311502" target="_blank" rel="noopener">(51) 99731-1502</a></p></div>
         </div>
-
+        <div class="contato-item">
+          <div class="contato-icon" aria-hidden="true">📷</div>
+          <div class="contato-item-txt"><strong>Instagram</strong><p><a href="https://www.instagram.com/caed_unisinos/" target="_blank" rel="noopener">@caed_unisinos</a></p></div>
+        </div>
         <div class="contato-socials">
-          <a href="https://instagram.com/caed_unisinos" target="_blank" class="social-btn" title="Instagram">📷</a>
-          <a href="https://wa.me/5551999999999" target="_blank" class="social-btn" title="WhatsApp">💬</a>
-          <a href="mailto:caed@unisinos.br" class="social-btn" title="E-mail">✉️</a>
+          <a href="https://www.instagram.com/caed_unisinos/" target="_blank" rel="noopener" class="social-btn" aria-label="Instagram CAED">📷</a>
+          <a href="https://wa.me/5551997311502" target="_blank" rel="noopener" class="social-btn" aria-label="WhatsApp CAED">💬</a>
+          <a href="mailto:caed-unisinos@outlook.com" class="social-btn" aria-label="E-mail CAED">✉️</a>
         </div>
       </div>
-
       <div class="reveal">
         <div class="contato-form">
           <div class="form-title">Mande uma mensagem</div>
+          <div class="form-group"><label for="fn">Seu nome</label><input type="text" id="fn" placeholder="Nome completo" autocomplete="name"/></div>
+          <div class="form-group"><label for="fe">E-mail</label><input type="email" id="fe" placeholder="seu@email.com" autocomplete="email"/></div>
           <div class="form-group">
-            <label>Seu nome</label>
-            <input type="text" placeholder="Nome completo" />
-          </div>
-          <div class="form-group">
-            <label>E-mail</label>
-            <input type="email" placeholder="seu@email.com" />
-          </div>
-          <div class="form-group">
-            <label>Assunto</label>
-            <select>
+            <label for="fa">Assunto</label>
+            <select id="fa">
               <option value="">Selecione...</option>
               <option>Sugestão</option>
               <option>Dúvida sobre a gestão</option>
               <option>Interesse em produto</option>
-              <option>Simulados / Estudos</option>
+              <option>Carteirinha Estudantil</option>
               <option>Parceria / Evento</option>
               <option>Outros</option>
             </select>
           </div>
-          <div class="form-group">
-            <label>Mensagem</label>
-            <textarea placeholder="Escreva aqui sua mensagem..."></textarea>
-          </div>
+          <div class="form-group"><label for="fm">Mensagem</label><textarea id="fm" placeholder="Escreva aqui..."></textarea></div>
           <button class="btn btn-gold" style="width:100%;" onclick="enviarForm()">Enviar mensagem →</button>
-          <p style="margin-top:1rem; font-size:0.82rem; color:rgba(201,168,76,0.35); text-align:center;">
-            Ou fale direto pelo WhatsApp para resposta imediata.
-          </p>
+          <p style="margin-top:1rem;font-size:.82rem;color:rgba(201,168,76,.35);text-align:center;">Prefere resposta rápida? Use o <a href="https://wa.me/5551997311502" target="_blank" rel="noopener" style="color:var(--gold);">WhatsApp</a>.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
+</main>
 
-<!-- ══════ FOOTER ══════ -->
-<footer>
+<footer role="contentinfo">
   <div class="footer-inner">
     <div class="footer-top">
       <div class="footer-brand">
         <strong>CAED</strong>
-        <span>Centro Acadêmico · Direito Unisinos</span>
-        <p>Representando os estudantes de Direito da UNISINOS nos campi de São Leopoldo e Porto Alegre desde a fundação do centro acadêmico.</p>
+        <span class="footer-sub">Centro Acadêmico · Direito Unisinos</span>
+        <p>Representando os estudantes de Direito da UNISINOS nos campi de São Leopoldo e Porto Alegre, Rio Grande do Sul.</p>
       </div>
       <div class="footer-col">
         <h4>Navegação</h4>
@@ -1577,97 +655,80 @@
           <li><a href="#sobre">Sobre o CAED</a></li>
           <li><a href="#gestao">Gestão 2025/2</a></li>
           <li><a href="#noticias">Notícias</a></li>
-          <li><a href="#simulados">Simulados</a></li>
-          <li><a href="#loja">Loja</a></li>
+          <li><a href="https://fabiowlademir.github.io/simuladosdireito/" target="_blank" rel="noopener">Simulados ↗</a></li>
+          <li><a href="#loja">Loja Oficial</a></li>
           <li><a href="#contato">Contato</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Contato Rápido</h4>
         <ul>
-          <li><a href="https://instagram.com/caed_unisinos" target="_blank">📷 @caed_unisinos</a></li>
-          <li><a href="mailto:caed@unisinos.br">✉️ caed@unisinos.br</a></li>
-          <li><a href="https://wa.me/5551999999999" target="_blank">💬 WhatsApp</a></li>
-          <li><a href="https://unisinos.br" target="_blank">🎓 UNISINOS</a></li>
+          <li><a href="https://www.instagram.com/caed_unisinos/" target="_blank" rel="noopener">📷 @caed_unisinos</a></li>
+          <li><a href="https://wa.me/5551997311502" target="_blank" rel="noopener">💬 (51) 99731-1502</a></li>
+          <li><a href="mailto:caed-unisinos@outlook.com">✉️ caed-unisinos@outlook.com</a></li>
+          <li><a href="https://www.unisinos.br" target="_blank" rel="noopener">🎓 UNISINOS</a></li>
         </ul>
+      </div>
+    </div>
+
+    <div class="footer-dev-strip">
+      <span class="footer-dev-label">⚡ Design &amp; Desenvolvimento</span>
+      <div class="footer-dev-links">
+        <a href="https://f2suporte.blogspot.com/2025/07/fabio-wlademir-especialista-em-ti-noc.html" target="_blank" rel="noopener">💻 Fábio Wlademir</a>
+        <span class="footer-dev-sep">·</span>
+        <a href="https://www.linkedin.com/in/fabiowlademir/" target="_blank" rel="noopener">🔗 LinkedIn</a>
+        <span class="footer-dev-sep">·</span>
+        <a href="https://www.instagram.com/fabiowlademirrs/" target="_blank" rel="noopener">📷 Instagram</a>
       </div>
     </div>
 
     <div class="footer-bottom">
       <span>© 2026 CAED – Direito UNISINOS · Todos os direitos reservados</span>
-      <span>Desenvolvido por <a href="#">Fábio Wlademir</a> · Site em construção</span>
+      <span>Site em desenvolvimento · <a href="https://www.instagram.com/caed_unisinos/" target="_blank" rel="noopener">@caed_unisinos</a></span>
     </div>
   </div>
 </footer>
 
-<!-- ══════ MODAL ══════ -->
-<div class="modal-overlay" id="modalOverlay" onclick="fecharModal(event)">
+<div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" onclick="fecharModal(event)">
   <div class="modal">
-    <button class="modal-close" onclick="fecharModalBtn()">✕</button>
+    <button class="modal-close" onclick="fecharModalBtn()" aria-label="Fechar">✕</button>
     <h3 id="modalTitulo">Tenho interesse!</h3>
-    <p id="modalTexto">Ótimo! Para fazer seu pedido, fale diretamente com o CAED pelo WhatsApp ou e-mail. É rápido e sem burocracia.</p>
+    <p id="modalTexto">Fale diretamente com o CAED pelo WhatsApp ou e-mail.</p>
     <div class="modal-btns">
-      <a id="modalWpp" href="#" target="_blank" class="btn btn-gold" style="text-align:center;">📱 Chamar no WhatsApp</a>
+      <a id="modalWpp" href="#" target="_blank" rel="noopener" class="btn btn-gold" style="text-align:center;">📱 Chamar no WhatsApp</a>
       <a id="modalEmail" href="#" class="btn btn-ghost" style="text-align:center;">✉️ Enviar e-mail</a>
     </div>
   </div>
 </div>
 
-<!-- ══════ JS ══════ -->
 <script>
-  /* NAV scroll */
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 40);
-  });
-
-  /* Hamburger */
-  const toggle = document.getElementById('navToggle');
-  const mobile = document.getElementById('navMobile');
-  toggle.addEventListener('click', () => mobile.classList.toggle('open'));
-  mobile.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobile.classList.remove('open')));
-
-  /* Scroll reveal */
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-  /* Quiz */
-  let respondido = false;
-  function responder(el, correto) {
-    if (respondido) return;
-    respondido = true;
-    el.classList.add(correto ? 'correta' : 'errada');
-    if (!correto) {
-      document.querySelectorAll('.quiz-opcao')[2].classList.add('correta');
-    }
-    document.getElementById('quizMsg').textContent = correto ? '✓ Correto! Parabéns.' : '✗ Incorreto. A alternativa C está correta.';
-  }
-  function resetQuiz() {
-    respondido = false;
-    document.querySelectorAll('.quiz-opcao').forEach(o => { o.classList.remove('correta','errada'); });
-    document.getElementById('quizMsg').textContent = 'Clique em uma alternativa para responder';
-  }
-
-  /* Modal loja */
-  function abrirModal(produto) {
-    const overlay = document.getElementById('modalOverlay');
-    document.getElementById('modalTitulo').textContent = 'Interesse: ' + produto;
-    document.getElementById('modalTexto').textContent =
-      `Ótimo! Para saber mais sobre "${produto}" e fazer seu pedido, fale diretamente com o CAED. É sem burocracia!`;
-    const msg = encodeURIComponent(`Olá, tenho interesse no(a): ${produto}`);
-    document.getElementById('modalWpp').href = `https://wa.me/5551999999999?text=${msg}`;
-    document.getElementById('modalEmail').href = `mailto:caed@unisinos.br?subject=Interesse: ${produto}`;
-    overlay.classList.add('open');
-  }
-  function fecharModal(e) { if (e.target === document.getElementById('modalOverlay')) fecharModalBtn(); }
-  function fecharModalBtn() { document.getElementById('modalOverlay').classList.remove('open'); }
-
-  /* Form fake submit */
-  function enviarForm() {
-    alert('Em breve! Por enquanto, entre em contato pelo WhatsApp ou e-mail do CAED. 😊');
-  }
+const WPP='5551997311502',EMAIL='caed-unisinos@outlook.com';
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>40));
+const tog=document.getElementById('navToggle'),mob=document.getElementById('navMobile');
+tog.addEventListener('click',()=>mob.classList.toggle('open'));
+mob.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>mob.classList.remove('open')));
+const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')}),{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+function abrirModal(p){
+  document.getElementById('modalTitulo').textContent='Interesse: '+p;
+  document.getElementById('modalTexto').textContent='Ótimo! Para saber mais sobre "'+p+'", fale com o CAED — rápido e sem burocracia.';
+  const m=encodeURIComponent('Olá CAED, tenho interesse no(a): '+p);
+  document.getElementById('modalWpp').href='https://wa.me/'+WPP+'?text='+m;
+  document.getElementById('modalEmail').href='mailto:'+EMAIL+'?subject=Interesse: '+p+'&body=Olá CAED, tenho interesse no(a): '+p;
+  document.getElementById('modalOverlay').classList.add('open');
+}
+function fecharModal(e){if(e.target===document.getElementById('modalOverlay'))fecharModalBtn()}
+function fecharModalBtn(){document.getElementById('modalOverlay').classList.remove('open')}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')fecharModalBtn()});
+function enviarForm(){
+  const n=document.getElementById('fn').value.trim();
+  const a=document.getElementById('fa').value;
+  const m=document.getElementById('fm').value.trim();
+  if(!n||!m){alert('Por favor, preencha seu nome e a mensagem.');return}
+  const t=encodeURIComponent('Olá CAED!\n\nNome: '+n+'\nAssunto: '+(a||'Geral')+'\n\n'+m);
+  window.open('https://wa.me/'+WPP+'?text='+t,'_blank');
+}
 </script>
 </body>
 </html>
