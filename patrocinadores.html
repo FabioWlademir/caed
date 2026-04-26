@@ -52,7 +52,7 @@ body::after{content:'';position:fixed;inset:0;background-image:url("data:image/s
 .nav-mobile a{font-family:'Montserrat',sans-serif;font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cream-dk);padding:.75rem 0;border-bottom:1px solid rgba(201,168,76,.1)}
 .nav-mobile a.sim-lnk{color:var(--gold-lt)}
 .nav-mobile.open{display:flex}
-.nav-logo-img{width:42px;height:42px;object-fit:cover;border-radius:3px;border:1px solid rgba(201,168,76,0.3)}
+.nav-logo-img{width:42px;height:42px;object-fit:contain;border-radius:3px;border:1px solid rgba(201,168,76,0.3);background:transparent}
 
 /* HERO / PAGE HEADER */
 .page-hero{min-height:42vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;background:radial-gradient(ellipse at 20% 50%,rgba(139,26,40,.6) 0%,transparent 60%),radial-gradient(ellipse at 80% 30%,rgba(107,15,26,.4) 0%,transparent 50%),var(--dark);padding:120px 2rem 4rem}
@@ -83,11 +83,12 @@ hr.ornament{border:none;height:1px;background:linear-gradient(to right,transpare
 .patroc-intro .sec-lead{margin:0 auto 2rem}
 
 /* CATEGORY LABEL */
-.cat-label{font-family:'Montserrat',sans-serif;font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);display:inline-flex;align-items:center;gap:.5rem;margin-bottom:2rem}
-.cat-label::before,.cat-label::after{content:'';flex:1;height:1px;background:rgba(201,168,76,.3);min-width:30px}
+.cat-label-wrap{text-align:center;margin-bottom:2rem}
+.cat-label{font-family:'Montserrat',sans-serif;font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);display:inline-flex;align-items:center;gap:.5rem}
+.cat-label::before,.cat-label::after{content:'';height:1px;background:rgba(201,168,76,.3);width:40px}
 
 /* SPONSOR CARD */
-.sponsor-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:2rem;margin-bottom:3.5rem}
+.sponsor-grid{display:grid;grid-template-columns:1fr;gap:2rem;margin-bottom:3.5rem;max-width:900px;margin-left:auto;margin-right:auto;width:100%}
 .sponsor-card{background:linear-gradient(145deg,rgba(69,10,18,.7),rgba(34,18,24,.9));border:1px solid rgba(201,168,76,.18);border-radius:4px;overflow:hidden;transition:transform .3s,box-shadow .3s,border-color .3s;position:relative}
 .sponsor-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,var(--gold),transparent);opacity:0;transition:opacity .3s}
 .sponsor-card:hover{transform:translateY(-5px);box-shadow:0 16px 40px rgba(0,0,0,.4),0 0 0 1px rgba(201,168,76,.25);border-color:rgba(201,168,76,.35)}
@@ -114,7 +115,7 @@ hr.ornament{border:none;height:1px;background:linear-gradient(to right,transpare
 .soc-btn.btn-wpp:hover{background:rgba(37,211,102,.08);border-color:rgba(37,211,102,.55)}
 
 /* VAGA SECTION */
-.vaga-section{background:linear-gradient(135deg,rgba(69,10,18,.4),rgba(24,8,16,.6));border:1px solid rgba(201,168,76,.15);border-radius:4px;padding:3.5rem;text-align:center;position:relative;overflow:hidden;margin-top:1rem}
+.vaga-section{background:linear-gradient(135deg,rgba(69,10,18,.4),rgba(24,8,16,.6));border:1px solid rgba(201,168,76,.15);border-radius:4px;padding:4rem 5rem;text-align:center;position:relative;overflow:hidden;margin-top:1rem}
 .vaga-section::before{content:'◆  PATROCINADOR EXCLUSIVO  ◆';position:absolute;top:1.2rem;left:50%;transform:translateX(-50%);font-family:'Montserrat',sans-serif;font-size:.48rem;letter-spacing:.35em;color:rgba(201,168,76,.25);white-space:nowrap}
 .vaga-icon{font-size:2.5rem;margin-bottom:1rem;display:block;opacity:.5}
 .vaga-title{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;color:var(--cream);margin-bottom:.5rem}
@@ -170,6 +171,7 @@ footer{background:var(--brd-dk);border-top:1px solid rgba(201,168,76,.12);paddin
   .footer-top{grid-template-columns:1fr}
   .vaga-section{padding:2.5rem 1.5rem}
   .seja-box{padding:2.5rem 1.5rem}
+  .sponsor-grid{max-width:100%}
 }
 
 /* SCROLL REVEAL */
@@ -240,7 +242,7 @@ footer{background:var(--brd-dk);border-top:1px solid rgba(201,168,76,.12);paddin
     </div>
 
     <!-- ─── CATEGORIA: AGÊNCIA DE EMPREGOS ─── -->
-    <div class="reveal">
+    <div class="reveal cat-label-wrap">
       <div class="cat-label">Agência de Empregos</div>
     </div>
     <div class="sponsor-grid reveal">
@@ -257,7 +259,7 @@ footer{background:var(--brd-dk);border-top:1px solid rgba(201,168,76,.12);paddin
     <hr class="ornament" style="margin:0 0 3.5rem"/>
 
     <!-- ─── CATEGORIA: LOJA DE ROUPAS ─── -->
-    <div class="reveal">
+    <div class="reveal cat-label-wrap">
       <div class="cat-label">Loja de Roupas</div>
     </div>
     <div class="sponsor-grid reveal">
@@ -274,7 +276,7 @@ footer{background:var(--brd-dk);border-top:1px solid rgba(201,168,76,.12);paddin
     <hr class="ornament" style="margin:0 0 3.5rem"/>
 
     <!-- ─── CATEGORIA: LIVRARIA / MATERIAL ACADÊMICO ─── -->
-    <div class="reveal">
+    <div class="reveal cat-label-wrap">
       <div class="cat-label">Livraria &amp; Material Acadêmico</div>
     </div>
     <div class="sponsor-grid reveal">
@@ -290,7 +292,7 @@ footer{background:var(--brd-dk);border-top:1px solid rgba(201,168,76,.12);paddin
     <hr class="ornament" style="margin:0 0 3.5rem"/>
 
     <!-- ─── CATEGORIA: ALIMENTAÇÃO / RESTAURANTE ─── -->
-    <div class="reveal">
+    <div class="reveal cat-label-wrap">
       <div class="cat-label">Alimentação &amp; Restaurante</div>
     </div>
     <div class="sponsor-grid reveal">
@@ -306,7 +308,7 @@ footer{background:var(--brd-dk);border-top:1px solid rgba(201,168,76,.12);paddin
     <hr class="ornament" style="margin:0 0 3.5rem"/>
 
     <!-- ─── CATEGORIA: CURSOS E PREPARATÓRIOS ─── -->
-    <div class="reveal">
+    <div class="reveal cat-label-wrap">
       <div class="cat-label">Cursos &amp; Preparatórios OAB</div>
     </div>
     <div class="sponsor-grid reveal">
@@ -316,6 +318,22 @@ footer{background:var(--brd-dk);border-top:1px solid rgba(201,168,76,.12);paddin
         <div class="vaga-sub">Preparatório OAB / Curso · Patrocinador Exclusivo</div>
         <p class="vaga-txt">Prepare os estudantes para o Exame da OAB. Seja o curso parceiro oficial do CAED e alcance quem mais precisa do seu serviço.</p>
         <a href="https://wa.me/5551997311502?text=Olá%20CAED%2C%20tenho%20interesse%20em%20ser%20patrocinador%20na%20categoria%20Cursos%20e%20Preparatórios!" target="_blank" rel="noopener" class="btn btn-gold">💬 Quero ser patrocinador</a>
+      </div>
+    </div>
+
+    <hr class="ornament" style="margin:0 0 3.5rem"/>
+
+    <!-- ─── CATEGORIA: OUTROS SEGMENTOS ─── -->
+    <div class="reveal cat-label-wrap">
+      <div class="cat-label">Outros Segmentos</div>
+    </div>
+    <div class="sponsor-grid reveal">
+      <div class="vaga-section" style="border-color:rgba(201,168,76,.3);background:linear-gradient(135deg,rgba(107,15,26,.25),rgba(24,8,16,.55));">
+        <span class="vaga-icon" style="opacity:.7;">✨</span>
+        <div class="vaga-title">Seu Segmento Aqui</div>
+        <div class="vaga-sub">Categoria Aberta · Patrocinador Exclusivo</div>
+        <p class="vaga-txt">Sua empresa não se encaixa nas categorias acima? Sem problema — o CAED está aberto a novas parcerias. Entre em contato e vamos conversar sobre como sua marca pode apoiar os estudantes de Direito da UNISINOS.</p>
+        <a href="https://wa.me/5551997311502?text=Olá%20CAED%2C%20gostaria%20de%20propor%20uma%20parceria%20em%20um%20novo%20segmento!" target="_blank" rel="noopener" class="btn btn-ghost">💬 Propor parceria</a>
       </div>
     </div>
 
